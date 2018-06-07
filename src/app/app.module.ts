@@ -10,6 +10,15 @@ import { TabsPage } from '../pages/tabs/tabs';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
+import {StoryService} from "../pages/game/story.service";
+import {AnimatesDirective, AnimationService} from "css-animator";
+import {GamePage} from "../pages/game/game";
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
+import {IonicStorageModule} from "@ionic/storage";
+import {ParserService} from "../pages/game/parser.service";
+import {StorageService} from "./storage.service";
+import {SettingsPage} from "../pages/settings/settings";
+import {Storage} from "@ionic/storage"
 
 @NgModule({
   declarations: [
@@ -17,11 +26,15 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    GamePage,
+    AnimatesDirective
   ],
   imports: [
     BrowserModule,
-    IonicModule.forRoot(MyApp)
+    BrowserAnimationsModule,
+    IonicModule.forRoot(MyApp),
+    IonicStorageModule.forRoot()
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -29,11 +42,18 @@ import { SplashScreen } from '@ionic-native/splash-screen';
     AboutPage,
     ContactPage,
     HomePage,
-    TabsPage
+    TabsPage,
+    GamePage,
+    SettingsPage
   ],
   providers: [
     StatusBar,
     SplashScreen,
+    StoryService,
+    ParserService,
+    Storage,
+    StorageService,
+    AnimationService,
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })

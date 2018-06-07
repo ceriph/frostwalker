@@ -1,0 +1,52 @@
+page-game {
+  .content {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .info {
+    position: relative;
+    color: #AAA;
+    text-align: center;
+    top: 60%;
+  }
+
+  .item-narrative {
+    padding: 5px;
+    margin: 10px;
+    border: 1px solid black;
+    text-align: center;
+  }
+
+  .item-chapter {
+    padding: 5px;
+    margin: 10px;
+    font-size: larger;
+    text-align: center;
+  }
+
+  .item-dialogue {
+    padding: 5px;
+    margin: 10px;
+    border: 1px solid black;
+    text-align: center;
+    font-style: italic;
+  }
+
+  .item-choice {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+  .item-name {
+    width: 100%;
+    padding: 10px;
+    margin-top: 20px;
+    text-align: center;
+  }
+
+
+}

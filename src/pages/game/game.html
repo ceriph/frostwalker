@@ -1,0 +1,34 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Game</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding on-tap="tapNext()">
+  <div class="content">
+    <div *ngFor="let item of items" [@fadeIn]>
+      <div class="item-chapter" *ngIf="item.type === storyItemTypes.CHAPTER">
+        Chapter {{item.content}}
+      </div>
+      <div class="item-narrative" *ngIf="item.type === storyItemTypes.NARRATIVE">
+        {{parse(item.content)}}
+      </div>
+      <div class="item-dialogue" *ngIf="item.type === storyItemTypes.DIALOGUE">
+        "{{parse(item.content)}}"
+      </div>
+      <ion-buttons *ngIf="item.type === storyItemTypes.CHOICE">
+        <button class="item-choice" *ngFor="let choice of item.content.split(',')" (click)="makeChoice(choice.split('=')[0])">
+          {{choice.split("=")[1]}}
+        </button>
+      </ion-buttons>
+      <div *ngIf="item.type === storyItemTypes.NAME">
+        <input class="item-name" type="text" name="name" [(ngModel)]="character.name">
+        <button class="item-name" (click)="next()">Accept</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="info" *ngIf="info" [@fadeIn]>
+    TAP ANYWHERE TO CONTINUE
+  </div>
+</ion-content>
