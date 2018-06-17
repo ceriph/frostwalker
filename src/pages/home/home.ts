@@ -25,6 +25,14 @@ export class HomePage {
   }
 
   newGame() {
+    if(this.existingData) {
+      this.confirmReset();
+    } else {
+      this.continue();
+    }
+  }
+
+  private confirmReset() {
     let alert = this.alertCtrl.create({
       title: 'Confirm Data Loss',
       message: 'Any existing progress will be lost, are you sure?',
@@ -32,13 +40,14 @@ export class HomePage {
         {
           text: 'Cancel',
           role: 'cancel',
-          handler: () => {}
+          handler: () => {
+          }
         },
         {
           text: 'Reset',
           handler: () => {
             this.storageService.reset();
-            this.navCtrl.push(GamePage);
+            this.continue();
           }
         }
       ]

@@ -12,5 +12,37 @@ export class StoryItem {
 }
 
 export enum StoryItemType {
-  NAME, CHAPTER, NARRATIVE, DIALOGUE, CHOICE, SOUND, T
+  NAME, CHAPTER, NARRATIVE, DIALOGUE, CHOICE, END
+}
+
+export class Choice {
+  intuition: string;
+  options: Option[];
+
+  constructor(intuition: string, options: Option[]) {
+    this.intuition = intuition;
+    this.options = options;
+  }
+
+  static fromString(value: string): Choice {
+    const firstSplit = value.split('#');
+    const secondSplit = firstSplit[1].split('|');
+    const options = secondSplit.map((option) => {
+      const optionArray = option.split('=');
+      return new Option(optionArray[0], optionArray[1]);
+    });
+    console.log(options);
+    return new Choice(firstSplit[0], options);
+  }
+
+}
+
+export class Option {
+  name: string;
+  label: string;
+
+  constructor(name: string, label: string){
+    this.name = name;
+    this.label = label;
+  }
 }

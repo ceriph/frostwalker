@@ -1,8 +1,8 @@
 import {Component} from "@angular/core";
-import {NavController, Platform} from "ionic-angular";
+import {AlertController} from "ionic-angular";
 import {StoryService} from "./story.service";
 import {animate, style, transition, trigger} from "@angular/animations";
-import {StoryItem, StoryItemType} from "./story";
+import {Choice, StoryItem, StoryItemType} from "./story";
 import {Character} from "./character";
 import {ParserService} from "./parser.service";
 import {StorageService} from "../../app/storage.service";
@@ -28,10 +28,11 @@ export class GamePage {
   character: Character;
   info: Boolean = true;
   items: StoryItem[] = [];
+  choice: Choice;
+  usedIntuition: boolean = false;
 
-  constructor(public navCtrl: NavController,
+  constructor(private alertCtrl: AlertController,
               private nativeAudio: NativeAudio,
-              private platform: Platform,
               private storyService: StoryService,
               private parserService: ParserService,
               private storageService: StorageService) {
@@ -42,23 +43,26 @@ export class GamePage {
       if (this.character == null)
         this.character = new Character;
 
-      this.next();
+      this.loadNextItem();
     });
   }
 
-  tapNext() {
+  onTap() {
     let storyItemType = this.items[this.items.length - 1].type;
-    if (storyItemType === StoryItemType.NARRATIVE ||
-      storyItemType === StoryItemType.DIALOGUE ||
-      storyItemType === StoryItemType.CHAPTER) {
-      this.nativeAudio.play(Sounds.tap.id).then();
-      this.next();
+    if (storyItemType !== StoryItemType.END && (storyItemType === StoryItemType.NARRATIVE || storyItemType === StoryItemType.DIALOGUE || storyItemType === StoryItemType.CHAPTER)) {
+      this.proceed();
     }
+  }
+
+  proceed() {
+    this.nativeAudio.play(Sounds.tap.id).then();
+    this.character.index++;
+    this.loadNextItem();
   }
 
   makeChoice(choice: string) {
     this.character.choices.push(choice.toUpperCase());
-    this.next();
+    this.proceed();
   }
 
   parse(text: string): string {
@@ -68,37 +72,67 @@ export class GamePage {
   swipe(event) {
     if (event.direction === 2) {
       console.log("Swipe!")
+      // todo make this work
     }
   }
 
-  private next() {
+  intuit() {
+    const alert = this.alertCtrl.create({
+      title: 'Intuition',
+      message: this.choice.intuition,
+      buttons: [
+        {
+          text: 'OK',
+          role: 'cancel',
+          handler: () => {
+            if(!this.usedIntuition) {
+              this.character.intuition--;
+              this.storageService.save(this.character);
+              this.usedIntuition = true;
+            }
+          }
+        }
+      ]
+    });
+    alert.present().then();
+  }
+
+  private loadNextItem() {
     const nextItem = this.getUntilRequirementsMet();
     if (this.requiresNewScreen(nextItem)) {
       this.items = [];
       this.storageService.save(this.character);
     }
 
+    if(nextItem.type === StoryItemType.CHOICE) {
+      this.choice = Choice.fromString(nextItem.content);
+      this.usedIntuition = false;
+    }
     this.items.push(nextItem);
 
-    if (this.info && this.items.length > 1)
+    if (this.info && (this.items.length > 1 || this.currentStoryItem().type === StoryItemType.CHOICE || this.currentStoryItem().type === StoryItemType.NAME || this.currentStoryItem().type === StoryItemType.END))
       this.info = false;
   }
 
   private requiresNewScreen(storyItem: StoryItem): boolean {
-    const currentStoryItem = this.items[this.items.length - 1];
     return (this.items.length > 0 &&
-      (this.isInteractive(storyItem) || this.isInteractive(currentStoryItem) || this.items.length == 3))
+      (this.isInteractive(storyItem) || this.isInteractive(this.currentStoryItem()) || this.items.length == 3))
+  }
+
+  private currentStoryItem() {
+    return this.items[this.items.length - 1];
   }
 
   private isInteractive(storyItem: StoryItem): boolean {
-    return storyItem.type === StoryItemType.CHAPTER ||storyItem.type === StoryItemType.CHOICE || storyItem.type === StoryItemType.NAME;
+    return storyItem.type === StoryItemType.CHAPTER || storyItem.type === StoryItemType.CHOICE || storyItem.type === StoryItemType.NAME || storyItem.type === StoryItemType.END;
   }
 
   private getUntilRequirementsMet(): StoryItem {
-    const nextItem = this.storyService.getItem(this.character.index++);
+    const nextItem = this.storyService.getItem(this.character.index);
     if (this.conditionsMet(nextItem)) {
       return nextItem;
     } else {
+      this.character.index++;
       return this.getUntilRequirementsMet();
     }
   }

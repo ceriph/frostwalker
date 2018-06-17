@@ -68,12 +68,17 @@ export class StoryService {
       {
         type: StoryItemType.CHOICE,
         requirements: [],
-        content: "FIGHTER=I love fighting,THINKER=I hate fighting"
+        content: "Jimmy seems concerned you were involved in the fight, it might ease his mind if you tell him you weren't. However, if you wanted to scare the kid...#FIGHTER=I jumped in as soon as I could|THINKER=I tried to leave but got caught up"
       },
       {
         type: StoryItemType.DIALOGUE,
         requirements: ["FIGHTER"],
-        content: "Oh wow, I wish I was that confident!"
+        content: "Ah, I see..."
+      },
+      {
+        type: StoryItemType.NARRATIVE,
+        requirements: ["FIGHTER"],
+        content: "He looks at you warily, backing away to the wall behind him."
       },
       {
         type: StoryItemType.DIALOGUE,
@@ -82,13 +87,13 @@ export class StoryService {
       },
       {
         type: StoryItemType.NARRATIVE,
-        requirements: [],
-        content: "Let's getItem on with this"
+        requirements: ["THINKER"],
+        content: "His demeanor visibly relaxes as he says this."
       },
       {
-        type: StoryItemType.NARRATIVE,
+        type: StoryItemType.END,
         requirements: [],
-        content: "Let's getItem on with this, shall we?"
+        content: "End of Demo"
       }
     ]
   };

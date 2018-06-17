@@ -1,4 +1,4 @@
-<ion-content padding on-tap="tapNext()">
+<ion-content padding on-tap="onTap()">
   <div class="content" (swipe)="swipe($event)">
     <div *ngFor="let item of items" [@fadeIn]>
       <div class="item-chapter" *ngIf="item.type === storyItemTypes.CHAPTER">
@@ -12,18 +12,22 @@
       </div>
       <ion-buttons *ngIf="item.type === storyItemTypes.CHOICE">
         <div class="info">CHOOSE YOUR PATH</div>
-        <button class="item-choice" *ngFor="let choice of item.content.split(',')" (click)="makeChoice(choice.split('=')[0])">
-          {{choice.split("=")[1]}}
+        <div class="info-small">Intuition: {{character.intuition}}</div>
+        <button *ngIf="character.intuition > 0" class="item-choice" (click)="intuit(choice)">Intuition</button>
+        <button class="item-choice" *ngFor="let option of choice.options" (click)="makeChoice(option.name)">
+          {{option.label}}
         </button>
       </ion-buttons>
       <div *ngIf="item.type === storyItemTypes.NAME">
         <input class="item-name" type="text" name="name" [(ngModel)]="character.name">
-        <button class="item-choice" (click)="next()">Accept</button>
+        <button class="item-choice" (click)="proceed()">Accept</button>
+      </div>
+      <div class="item-chapter" *ngIf="item.type === storyItemTypes.END">
+        {{item.content}}
       </div>
     </div>
-  </div>
-
-  <div class="info" *ngIf="info" [@fadeIn]>
-    TAP ANYWHERE TO CONTINUE
+    <div class="info" *ngIf="info" [@fadeIn]>
+      TAP ANYWHERE TO CONTINUE
+    </div>
   </div>
 </ion-content>

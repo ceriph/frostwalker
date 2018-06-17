@@ -13,11 +13,21 @@ page-game {
     position: relative;
     opacity: 0.5;
     text-align: center;
-    top: 60%;
+    top: 2rem;
+
+    margin-bottom: 1em;
+
+    font-size: 2rem;
+  }
+
+  .info-small {
+    position: relative;
+    opacity: 0.5;
+    text-align: center;
 
     margin-bottom: 5em;
 
-    font-size: 2rem;
+    font-size: 1rem;
   }
 
   .item-narrative, .item-dialogue, .item-name, .item-choice {
