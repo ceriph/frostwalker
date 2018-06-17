@@ -1,5 +1,5 @@
 // http://ionicframework.com/docs/theming/
-
+@import '../theme/variables';
 
 // App Global Sass
 // --------------------------------------------------
@@ -14,3 +14,10 @@
 // To declare rules for a specific mode, create a child rule
 // for the .md, .ios, or .wp mode classes. The mode class is
 // automatically applied to the <body> element in the app.
+
+body {
+  font-size: 62.5%;
+  font-family: "Roboto", "Helvetica Neue", sans-serif;
+}
+
+.scroll-content{overflow-y: auto;}

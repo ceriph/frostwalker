@@ -1,8 +1,25 @@
 page-home {
+  @import "../../theme/variables";
 
-  .play-button {
-    width: 100%;
-    height: 10%;
+  .content {
+    background-color: color($colors, dark);
+    color: color($colors, primary);
   }
 
+  .title {
+    text-align: center;
+
+    font-size: 3rem;
+  }
+
+  .menu-button {
+    width: 100%;
+    height: 8rem;
+    margin-top: 3rem;
+
+    font-size: 2rem;
+
+    background-color: color($colors, light);
+    color: color($colors, dark);
+  }
 }

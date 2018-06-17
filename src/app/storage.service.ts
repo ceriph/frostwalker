@@ -1,6 +1,8 @@
 import {Character} from "../pages/game/character";
 import {Storage} from "@ionic/storage";
+import {Injectable} from "@angular/core";
 
+@Injectable()
 export class StorageService {
   SAVE_KEY = "character";
 

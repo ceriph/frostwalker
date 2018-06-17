@@ -1,52 +1,57 @@
 page-game {
+  @import '../../theme/variables';
+
   .content {
     position: relative;
     top: 50%;
     transform: translateY(-50%);
+    background-color: color($colors, dark);
+    color: color($colors, primary);
   }
 
   .info {
     position: relative;
-    color: #AAA;
+    opacity: 0.5;
     text-align: center;
     top: 60%;
+
+    margin-bottom: 5em;
+
+    font-size: 2rem;
   }
 
-  .item-narrative {
-    padding: 5px;
-    margin: 10px;
-    border: 1px solid black;
+  .item-narrative, .item-dialogue, .item-name, .item-choice {
+    width: 100%;
+
+    font-size: 1.5rem;
+
+    padding: 2rem;
+    margin: 1rem 0 auto;
     text-align: center;
+
+    border-color: color($colors, primary);
+    background-color: color($colors, secondary);
   }
 
   .item-chapter {
-    padding: 5px;
-    margin: 10px;
-    font-size: larger;
+    font-size: 4rem;
     text-align: center;
   }
 
   .item-dialogue {
-    padding: 5px;
-    margin: 10px;
-    border: 1px solid black;
-    text-align: center;
     font-style: italic;
   }
 
   .item-choice {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    text-align: center;
+    font-size: 2rem;
+    background-color: color($colors, light);
+    color: color($colors, dark);
   }
 
   .item-name {
-    width: 100%;
-    padding: 10px;
-    margin-top: 20px;
-    text-align: center;
+    background-color: color($colors, secondary);
+    color: color($colors, primary);
+
+    border: none;
   }
-
-
 }

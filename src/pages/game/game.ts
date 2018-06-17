@@ -1,11 +1,13 @@
 import {Component} from "@angular/core";
-import {NavController} from "ionic-angular";
+import {NavController, Platform} from "ionic-angular";
 import {StoryService} from "./story.service";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {StoryItem, StoryItemType} from "./story";
-import {Character, CharacterTag} from "./character";
+import {Character} from "./character";
 import {ParserService} from "./parser.service";
 import {StorageService} from "../../app/storage.service";
+import {NativeAudio} from "@ionic-native/native-audio";
+import {Sounds} from "./sounds";
 
 @Component({
   selector: 'page-game',
@@ -28,9 +30,12 @@ export class GamePage {
   items: StoryItem[] = [];
 
   constructor(public navCtrl: NavController,
+              private nativeAudio: NativeAudio,
+              private platform: Platform,
               private storyService: StoryService,
               private parserService: ParserService,
               private storageService: StorageService) {
+
     storageService.load().then((character) => {
       this.character = character;
 
@@ -46,13 +51,29 @@ export class GamePage {
     if (storyItemType === StoryItemType.NARRATIVE ||
       storyItemType === StoryItemType.DIALOGUE ||
       storyItemType === StoryItemType.CHAPTER) {
+      this.nativeAudio.play(Sounds.tap.id).then();
       this.next();
     }
   }
 
-  next() {
+  makeChoice(choice: string) {
+    this.character.choices.push(choice.toUpperCase());
+    this.next();
+  }
+
+  parse(text: string): string {
+    return this.parserService.parse(text, this.character);
+  }
+
+  swipe(event) {
+    if (event.direction === 2) {
+      console.log("Swipe!")
+    }
+  }
+
+  private next() {
     const nextItem = this.getUntilRequirementsMet();
-    if (this.items.length > 0 && nextItem.type != this.items[this.items.length - 1].type) {
+    if (this.requiresNewScreen(nextItem)) {
       this.items = [];
       this.storageService.save(this.character);
     }
@@ -63,17 +84,18 @@ export class GamePage {
       this.info = false;
   }
 
-  makeChoice(choice: string) {
-    this.character.tags.push(CharacterTag[choice.toUpperCase()]);
-    this.next();
+  private requiresNewScreen(storyItem: StoryItem): boolean {
+    const currentStoryItem = this.items[this.items.length - 1];
+    return (this.items.length > 0 &&
+      (this.isInteractive(storyItem) || this.isInteractive(currentStoryItem) || this.items.length == 3))
   }
 
-  parse(text: string): string {
-    return this.parserService.parse(text, this.character);
+  private isInteractive(storyItem: StoryItem): boolean {
+    return storyItem.type === StoryItemType.CHAPTER ||storyItem.type === StoryItemType.CHOICE || storyItem.type === StoryItemType.NAME;
   }
 
   private getUntilRequirementsMet(): StoryItem {
-    const nextItem = this.storyService.get(this.character.index++);
+    const nextItem = this.storyService.getItem(this.character.index++);
     if (this.conditionsMet(nextItem)) {
       return nextItem;
     } else {
@@ -83,7 +105,7 @@ export class GamePage {
 
   private conditionsMet(item: StoryItem): Boolean {
     for (let requirement of item.requirements) {
-      if (this.character.tags.indexOf(requirement) == -1) {
+      if (this.character.choices.indexOf(requirement) == -1) {
         return false;
       }
     }

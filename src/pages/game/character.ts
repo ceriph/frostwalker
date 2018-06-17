@@ -1,15 +1,12 @@
 export class Character {
   name: string;
+  book: number;
   index: number;
-  tags: CharacterTag[];
+  choices: string[];
 
   constructor() {
     this.name = "";
     this.index = 0;
-    this.tags = [];
+    this.choices = [];
   }
-}
-
-export enum CharacterTag {
-  FIGHTER, THINKER, NICE_TO_JIMMY
 }

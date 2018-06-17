@@ -1,11 +1,5 @@
-<ion-header>
-  <ion-navbar>
-    <ion-title>Game</ion-title>
-  </ion-navbar>
-</ion-header>
-
 <ion-content padding on-tap="tapNext()">
-  <div class="content">
+  <div class="content" (swipe)="swipe($event)">
     <div *ngFor="let item of items" [@fadeIn]>
       <div class="item-chapter" *ngIf="item.type === storyItemTypes.CHAPTER">
         Chapter {{item.content}}
@@ -17,13 +11,14 @@
         "{{parse(item.content)}}"
       </div>
       <ion-buttons *ngIf="item.type === storyItemTypes.CHOICE">
+        <div class="info">CHOOSE YOUR PATH</div>
         <button class="item-choice" *ngFor="let choice of item.content.split(',')" (click)="makeChoice(choice.split('=')[0])">
           {{choice.split("=")[1]}}
         </button>
       </ion-buttons>
       <div *ngIf="item.type === storyItemTypes.NAME">
         <input class="item-name" type="text" name="name" [(ngModel)]="character.name">
-        <button class="item-name" (click)="next()">Accept</button>
+        <button class="item-choice" (click)="next()">Accept</button>
       </div>
     </div>
   </div>
