@@ -2,13 +2,15 @@ page-home {
   @import "../../theme/variables";
 
   .content {
-    background-color: color($colors, dark);
-    color: color($colors, primary);
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: $background-color;
+    color: $text-color;
   }
 
   .title {
     text-align: center;
-
     font-size: 3rem;
   }
 
@@ -19,7 +21,7 @@ page-home {
 
     font-size: 2rem;
 
-    background-color: color($colors, light);
-    color: color($colors, dark);
+    background-color: $button-background-color;
+    color: $button-text-color;
   }
 }

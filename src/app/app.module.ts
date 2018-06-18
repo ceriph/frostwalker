@@ -1,5 +1,5 @@
 import {ErrorHandler, NgModule} from '@angular/core';
-import {BrowserModule} from '@angular/platform-browser';
+import {BrowserModule, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 
@@ -11,7 +11,7 @@ import {TabsPage} from '../pages/tabs/tabs';
 import {StatusBar} from '@ionic-native/status-bar';
 import {SplashScreen} from '@ionic-native/splash-screen';
 import {StoryService} from "../pages/game/story.service";
-import {AnimatesDirective, AnimationService} from "css-animator";
+import {AnimationService} from "css-animator";
 import {GamePage} from "../pages/game/game";
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 import {IonicStorageModule} from "@ionic/storage";
@@ -19,6 +19,7 @@ import {ParserService} from "../pages/game/parser.service";
 import {SettingsPage} from "../pages/settings/settings";
 import {StorageService} from "./storage.service";
 import {NativeAudio} from "@ionic-native/native-audio";
+import {MyHammerConfig} from "./gestures";
 
 @NgModule({
   declarations: [
@@ -28,8 +29,7 @@ import {NativeAudio} from "@ionic-native/native-audio";
     HomePage,
     TabsPage,
     GamePage,
-    SettingsPage,
-    AnimatesDirective
+    SettingsPage
   ],
   imports: [
     BrowserModule,
@@ -55,7 +55,9 @@ import {NativeAudio} from "@ionic-native/native-audio";
     StorageService,
     AnimationService,
     NativeAudio,
+    {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig},
     {provide: ErrorHandler, useClass: IonicErrorHandler}
   ]
 })
-export class AppModule {}
+export class AppModule {
+}

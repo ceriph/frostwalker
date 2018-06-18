@@ -54,6 +54,14 @@ export class GamePage {
     }
   }
 
+  hideTabs() {
+    document.querySelector(".tabbar")['style'].display = 'none';
+  }
+
+  showTabs() {
+    document.querySelector(".tabbar")['style'].display = 'flex';
+  }
+
   proceed() {
     this.nativeAudio.play(Sounds.tap.id).then();
     this.character.index++;
@@ -65,15 +73,14 @@ export class GamePage {
     this.proceed();
   }
 
-  parse(text: string): string {
-    return this.parserService.parse(text, this.character);
+  acceptName() {
+    if (this.character.name.length > 0) {
+      this.proceed();
+    }
   }
 
-  swipe(event) {
-    if (event.direction === 2) {
-      console.log("Swipe!")
-      // todo make this work
-    }
+  parse(text: string): string {
+    return this.parserService.parse(text, this.character);
   }
 
   intuit() {
@@ -85,7 +92,7 @@ export class GamePage {
           text: 'OK',
           role: 'cancel',
           handler: () => {
-            if(!this.usedIntuition) {
+            if (!this.usedIntuition) {
               this.character.intuition--;
               this.storageService.save(this.character);
               this.usedIntuition = true;
@@ -104,7 +111,7 @@ export class GamePage {
       this.storageService.save(this.character);
     }
 
-    if(nextItem.type === StoryItemType.CHOICE) {
+    if (nextItem.type === StoryItemType.CHOICE) {
       this.choice = Choice.fromString(nextItem.content);
       this.usedIntuition = false;
     }
@@ -145,4 +152,6 @@ export class GamePage {
     }
     return true;
   }
+
+
 }

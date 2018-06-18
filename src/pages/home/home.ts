@@ -1,5 +1,5 @@
 import {Component} from "@angular/core";
-import {Alert, AlertController, NavController} from "ionic-angular";
+import {AlertController, NavController} from "ionic-angular";
 import {GamePage} from "../game/game";
 import {StorageService} from "../../app/storage.service";
 

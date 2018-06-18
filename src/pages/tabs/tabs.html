@@ -1,6 +1,6 @@
-<ion-tabs [@slideUp] on-swipe-up="showTabs()" on-swipe-down="hideTabs()">
-  <ion-tab *ngIf="seeTabs" [root]="tabHome" tabTitle="Home" tabIcon="home"></ion-tab>
-  <ion-tab *ngIf="seeTabs" [root]="tabSettings" tabTitle="Settings" tabIcon="settings"></ion-tab>
-  <ion-tab *ngIf="seeTabs" [root]="tabAbout" tabTitle="About" tabIcon="information-circle"></ion-tab>
-  <ion-tab *ngIf="seeTabs" [root]="tabContact" tabTitle="Contact" tabIcon="contact"></ion-tab>
+<ion-tabs>
+  <ion-tab [root]="tabHome" tabTitle="Home" tabIcon="home"></ion-tab>
+  <ion-tab [root]="tabSettings" tabTitle="Settings" tabIcon="settings"></ion-tab>
+  <ion-tab [root]="tabAbout" tabTitle="About" tabIcon="information-circle"></ion-tab>
+  <ion-tab [root]="tabContact" tabTitle="Contact" tabIcon="contact"></ion-tab>
 </ion-tabs>

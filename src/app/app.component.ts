@@ -18,10 +18,18 @@ export class MyApp {
     platform.ready().then(() => {
       // Okay, so the platform is ready and our plugins are available.
       // Here you can do any higher level native things you might need.
-      this.nativeAudio.preloadComplex(Sounds.tap.id, Sounds.tap.path, 0.1, 1, 0).then();
+      this.nativeAudio.preloadComplex(Sounds.tap.id, Sounds.tap.path, 0.1, 1, 0).then(this.onSoundLoad, this.onSoundError);
 
       statusBar.styleDefault();
       splashScreen.hide();
     });
+  }
+
+  private onSoundLoad(result) {
+    console.log("Sound loaded:", result);
+  }
+
+  private onSoundError(result) {
+    console.log("Error loading sound:", result)
   }
 }
