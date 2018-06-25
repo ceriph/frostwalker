@@ -32,7 +32,8 @@ $colors: (
   bright: #F8F4E3,
   light: #FF8966,
   danger: #E5446D,
-  shade: #706C61,
+  highlight: #706C61,
+  shade: #424039,
   dark: #2A2B2A,
 );
 
@@ -58,7 +59,7 @@ $background-color: color($colors, dark);
 $text-color: color($colors, light);
 $box-background-color: color($colors, shade);
 $box-text-color: color($colors, bright);
-$button-background-color: color($colors, shade);
+$button-background-color: color($colors, highlight);
 $button-text-color: color($colors, light);
 
 @import "ionic.theme.default";

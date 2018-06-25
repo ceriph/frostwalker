@@ -24,6 +24,7 @@ import {Sounds} from "./sounds";
 export class GamePage {
 
   storyItemTypes = StoryItemType; // required to make enum available on page
+  maxItems = 5;
 
   character: Character;
   info: Boolean = true;
@@ -49,7 +50,7 @@ export class GamePage {
 
   onTap() {
     let storyItemType = this.items[this.items.length - 1].type;
-    if (storyItemType !== StoryItemType.END && (storyItemType === StoryItemType.NARRATIVE || storyItemType === StoryItemType.DIALOGUE || storyItemType === StoryItemType.CHAPTER)) {
+    if (storyItemType !== StoryItemType.END && (storyItemType === StoryItemType.NARRATIVE || storyItemType === StoryItemType.DIALOGUE_NPC || storyItemType === StoryItemType.DIALOGUE_PC || storyItemType === StoryItemType.CHAPTER)) {
       this.proceed();
     }
   }
@@ -123,7 +124,7 @@ export class GamePage {
 
   private requiresNewScreen(storyItem: StoryItem): boolean {
     return (this.items.length > 0 &&
-      (this.isInteractive(storyItem) || this.isInteractive(this.currentStoryItem()) || this.items.length == 3))
+      (this.isInteractive(storyItem) || this.isInteractive(this.currentStoryItem()) || this.items.length == this.maxItems))
   }
 
   private currentStoryItem() {

@@ -1,34 +1,52 @@
 <ion-content padding>
   <div class="wrapper" (tap)="onTap()" (swipeUp)="showTabs()" (swipeDown)="hideTabs()">
-    <div class="content">
+    <div class="content center">
       <div *ngFor="let item of items" [@fadeIn]>
-        <div class="item-chapter" *ngIf="item.type === storyItemTypes.CHAPTER">
+        <div class="font-large clear center spaced-large" *ngIf="item.type === storyItemTypes.CHAPTER">
           Chapter {{item.content}}
         </div>
-        <div class="item-narrative" *ngIf="item.type === storyItemTypes.NARRATIVE">
+
+        <div class="font-small box clear center spaced" *ngIf="item.type === storyItemTypes.NARRATIVE">
           {{parse(item.content)}}
         </div>
-        <div class="item-dialogue" *ngIf="item.type === storyItemTypes.DIALOGUE">
-          "{{parse(item.content)}}"
+
+        <div class="clear left full spaced" *ngIf="item.type === storyItemTypes.DIALOGUE_NPC">
+          <div class="indicator-left left"></div>
+          <div class="font-small font-italic box left wide">"{{parse(item.content)}}"</div>
         </div>
+
+        <div class="clear right full spaced" *ngIf="item.type === storyItemTypes.DIALOGUE_PC">
+          <div class="indicator-right right"></div>
+          <div class="font-small font-italic box right wide">"{{parse(item.content)}}"</div>
+        </div>
+
         <ion-buttons *ngIf="item.type === storyItemTypes.CHOICE">
-          <div class="info">CHOOSE YOUR PATH</div>
-          <div class="info-small">Intuition: {{character.intuition}}</div>
-          <button *ngIf="character.intuition > 0" class="item-choice" (tap)="intuit(choice)">Intuition</button>
-          <button class="item-choice" *ngFor="let option of choice.options" (tap)="makeChoice(option.name)">
+          <div class="font-large info clear center spaced">CHOOSE YOUR PATH</div>
+          <div class="font-small clear center spaced">Intuition: {{character.intuition}}</div>
+          <button class="font-medium box clear center spaced" *ngIf="character.intuition > 0" (tap)="intuit(choice)">Intuition</button>
+          <button class="font-medium box clear center spaced" *ngFor="let option of choice.options" (tap)="makeChoice(option.name)">
             {{option.label}}
           </button>
         </ion-buttons>
+
         <div *ngIf="item.type === storyItemTypes.NAME">
-          <input class="item-name" type="text" name="name" maxlength="16" [(ngModel)]="character.name">
-          <button class="item-choice" (tap)="acceptName()">Accept</button>
+          <input class="font-medium box clear center spaced" type="text" name="name" maxlength="16" [(ngModel)]="character.name">
+          <button class="font-medium box clear center spaced" (tap)="acceptName()">Accept</button>
         </div>
-        <div class="item-chapter" *ngIf="item.type === storyItemTypes.END">
+
+        <div class="font-large clear center spaced" *ngIf="item.type === storyItemTypes.END">
           {{item.content}}
         </div>
       </div>
-      <div class="info" *ngIf="info">
-        TAP ANYWHERE TO CONTINUE
+
+      <div class="font-medium clear center spaced" *ngIf="info">
+        <b>TAP ANYWHERE</b> TO CONTINUE
+      </div>
+      <div class="font-medium clear center spaced" *ngIf="info">
+        <b>SWIPE DOWN</b> TO HIDE MENU
+      </div>
+      <div class="font-medium clear center spaced" *ngIf="info">
+        <b>SWIPE UP</b> TO SHOW MENU
       </div>
     </div>
   </div>

@@ -1,6 +1,25 @@
 page-game {
   @import '../../theme/variables';
 
+  .clear {
+    clear: both;
+  }
+
+  .left {
+    float: left;
+  }
+
+  .right {
+    float: right;
+  }
+
+  .center {
+    float: left;
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+  }
+
   .wrapper {
     position: relative;
     width: 100%;
@@ -16,17 +35,6 @@ page-game {
     color: $text-color;
   }
 
-  .info {
-    position: relative;
-    opacity: 0.5;
-    text-align: center;
-    top: 2rem;
-
-    margin-bottom: 1em;
-
-    font-size: 2rem;
-  }
-
   .info-small {
     position: relative;
     opacity: 0.5;
@@ -37,38 +45,58 @@ page-game {
     font-size: 1rem;
   }
 
-  .item-narrative, .item-dialogue, .item-name, .item-choice {
+  .full {
     width: 100%;
+  }
 
+  .wide {
+    width: 80%;
+  }
+
+  .font-small {
     font-size: 1.5rem;
-
-    padding: 2rem;
-    margin: 1rem 0 auto;
-    text-align: center;
-
-    background-color: $box-background-color;
-    color: $box-text-color;
   }
 
-  .item-chapter {
+  .font-medium {
+    font-size: 2rem;
+  }
+
+  .font-large {
     font-size: 4rem;
-    text-align: center;
   }
 
-  .item-dialogue {
+  .font-italic {
     font-style: italic;
   }
 
-  .item-choice {
-    font-size: 2rem;
-    background-color: $button-background-color;
-    color: $button-text-color;
-  }
+  .box {
+    padding: 2rem;
 
-  .item-name {
     background-color: $box-background-color;
     color: $box-text-color;
+  }
 
-    border: none;
+  .spaced {
+    margin-bottom: 1rem;
+  }
+
+  .spaced-large {
+    margin-bottom: 3rem;
+  }
+
+  .indicator-left {
+    width: 0;
+    height: 0;
+
+    border-top: 2rem solid $box-background-color;
+    border-left: 2rem solid $background-color;
+  }
+
+  .indicator-right {
+    width: 0;
+    height: 0;
+
+    border-top: 2rem solid $box-background-color;
+    border-right: 2rem solid $background-color;
   }
 }
