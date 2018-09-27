@@ -16,8 +16,8 @@
 // automatically applied to the <body> element in the app.
 
 body {
-  font-size: 62.5%;
   font-family: "Roboto", "Helvetica Neue", sans-serif;
+  font-weight: lighter !important;
 }
 
 .scroll-content{overflow-y: auto;}

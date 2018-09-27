@@ -1,7 +1,9 @@
 <ion-content padding>
   <div class="content">
-    <h2 class="title">Worlds in Words</h2>
-    <button *ngIf="existingData" class="menu-button" (click)="continue()">Continue</button>
-    <button class="menu-button" (click)="newGame()">New Game</button>
+    <div class="logo">
+      <img src="assets/imgs/fw-logo.png">
+    </div>
+    <button *ngIf="existingData" class="menu-button" (click)="continue()">continue</button>
+    <button *ngIf="!existingData" class="menu-button" (click)="continue()">begin</button>
   </div>
 </ion-content>

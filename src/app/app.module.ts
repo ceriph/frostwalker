@@ -3,7 +3,7 @@ import {BrowserModule, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 
-import {AboutPage} from '../pages/about/about';
+import {StatsPage} from '../pages/stats/stats';
 import {ContactPage} from '../pages/contact/contact';
 import {HomePage} from '../pages/home/home';
 import {TabsPage} from '../pages/tabs/tabs';
@@ -24,7 +24,7 @@ import {MyHammerConfig} from "./gestures";
 @NgModule({
   declarations: [
     MyApp,
-    AboutPage,
+    StatsPage,
     ContactPage,
     HomePage,
     TabsPage,
@@ -40,7 +40,7 @@ import {MyHammerConfig} from "./gestures";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    AboutPage,
+    StatsPage,
     ContactPage,
     HomePage,
     TabsPage,

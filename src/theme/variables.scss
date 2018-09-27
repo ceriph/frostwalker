@@ -28,13 +28,15 @@ $app-direction: ltr;
 // The "primary" color is the only required color in the map.
 
 $colors: (
-  primary: #F8F4E3,
-  bright: #F8F4E3,
+  primary: #000000,
+  deepblue: #03256C,
+  bright: #FFFFFF,
+  dull: #F6F6F6,
+  flat: #C4C1B4,
   light: #FF8966,
   danger: #E5446D,
   highlight: #706C61,
-  shade: #424039,
-  dark: #2A2B2A,
+  shade: #424039
 );
 
 // App iOS Variables
@@ -55,12 +57,13 @@ $colors: (
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-$background-color: color($colors, dark);
-$text-color: color($colors, light);
-$box-background-color: color($colors, shade);
-$box-text-color: color($colors, bright);
-$button-background-color: color($colors, highlight);
-$button-text-color: color($colors, light);
+$background-color: color($colors, dull);
+$text-color: color($colors, deepblue);
+$box-background-color: color($colors, bright);
+$box-text-color: color($colors, deepblue);
+$button-background-color: color($colors, dull);
+$button-text-color: color($colors, dull);
+$border-color: color($colors, deepblue);
 
 @import "ionic.theme.default";
 

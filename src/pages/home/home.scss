@@ -11,7 +11,8 @@ page-home {
 
   .title {
     text-align: center;
-    font-size: 3rem;
+    font-size: 4rem;
+    font-weight: lighter;
   }
 
   .menu-button {
@@ -19,9 +20,15 @@ page-home {
     height: 8rem;
     margin-top: 3rem;
 
-    font-size: 2rem;
+    font-size: 2.5rem;
+    font-weight: lighter;
 
     background-color: $button-background-color;
-    color: $button-text-color;
+    color: $text-color;
+  }
+
+  .logo {
+    width: 80%;
+    margin: 0 auto;
   }
 }

@@ -2,12 +2,14 @@
   <div class="wrapper" (tap)="onTap()" (swipeUp)="showTabs()" (swipeDown)="hideTabs()">
     <div class="content center">
       <div *ngFor="let item of items" [@fadeIn]>
-        <div class="font-large clear center spaced-large" *ngIf="item.type === storyItemTypes.CHAPTER">
-          Chapter {{item.content}}
+        <div *ngIf="item.type === storyItemTypes.CHAPTER">
+          <div class="font-large clear center spaced-large">Chapter {{item.content}}</div>
+          <div class="clear spaced-border"></div>
         </div>
 
-        <div class="font-small box clear center spaced" *ngIf="item.type === storyItemTypes.NARRATIVE">
-          {{parse(item.content)}}
+        <div *ngIf="item.type === storyItemTypes.NARRATIVE">
+          <div class="font-small box clear center spaced">{{parse(item.content)}}</div>
+          <!--<div class="clear spaced-border"></div>-->
         </div>
 
         <div class="clear left full spaced" *ngIf="item.type === storyItemTypes.DIALOGUE_NPC">
@@ -21,32 +23,29 @@
         </div>
 
         <ion-buttons *ngIf="item.type === storyItemTypes.CHOICE">
-          <div class="font-large info clear center spaced">CHOOSE YOUR PATH</div>
-          <div class="font-small clear center spaced">Intuition: {{character.intuition}}</div>
-          <button class="font-medium box clear center spaced" *ngIf="character.intuition > 0" (tap)="intuit(choice)">Intuition</button>
+          <div class="font-large info clear center spaced-large">CHOOSE YOUR PATH</div>
+          <div class="clear spaced-border"></div>
+          <!--<button class="font-medium box clear center spaced-large" *ngIf="character.intuition > 0" (tap)="intuit(choice)">INTUITION ({{character.intuition}})</button>-->
+          <!--<div class="clear spaced-border"></div>-->
           <button class="font-medium box clear center spaced" *ngFor="let option of choice.options" (tap)="makeChoice(option.name)">
             {{option.label}}
           </button>
         </ion-buttons>
 
         <div *ngIf="item.type === storyItemTypes.NAME">
-          <input class="font-medium box clear center spaced" type="text" name="name" maxlength="16" [(ngModel)]="character.name">
-          <button class="font-medium box clear center spaced" (tap)="acceptName()">Accept</button>
+          <label class="font-large spaced-large">ENTER NAME</label>
+           <div class="clear spaced"></div>
+           <div class="clear spaced-border"></div>
+          <input class="font-medium box clear center spaced-large" type="text" name="name" maxlength="16" [(ngModel)]="character.name">
+          <div class="clear spaced-border"></div>
+          <button class="font-medium box clear center" (tap)="acceptName()">ACCEPT</button>
         </div>
 
         <div class="font-large clear center spaced" *ngIf="item.type === storyItemTypes.END">
           {{item.content}}
         </div>
-      </div>
 
-      <div class="font-medium clear center spaced" *ngIf="info">
-        <b>TAP ANYWHERE</b> TO CONTINUE
-      </div>
-      <div class="font-medium clear center spaced" *ngIf="info">
-        <b>SWIPE DOWN</b> TO HIDE MENU
-      </div>
-      <div class="font-medium clear center spaced" *ngIf="info">
-        <b>SWIPE UP</b> TO SHOW MENU
+        <div *ngIf="item.type === storyItemTypes.TUTORIAL" class="font-medium clear center spaced" [innerHtml]="item.content"></div>
       </div>
     </div>
   </div>

@@ -12,7 +12,6 @@ export class HomePage {
   existingData: boolean = false;
 
   constructor(public navCtrl: NavController,
-              private alertCtrl: AlertController,
               private storageService: StorageService) {
 
     this.storageService.load().then(result => {
@@ -22,36 +21,5 @@ export class HomePage {
 
   continue() {
     this.navCtrl.push(GamePage);
-  }
-
-  newGame() {
-    if(this.existingData) {
-      this.confirmReset();
-    } else {
-      this.continue();
-    }
-  }
-
-  private confirmReset() {
-    let alert = this.alertCtrl.create({
-      title: 'Confirm Data Loss',
-      message: 'Any existing progress will be lost, are you sure?',
-      buttons: [
-        {
-          text: 'Cancel',
-          role: 'cancel',
-          handler: () => {
-          }
-        },
-        {
-          text: 'Reset',
-          handler: () => {
-            this.storageService.reset();
-            this.continue();
-          }
-        }
-      ]
-    });
-    alert.present().then();
   }
 }

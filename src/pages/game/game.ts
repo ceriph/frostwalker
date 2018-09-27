@@ -1,5 +1,4 @@
 import {Component} from "@angular/core";
-import {AlertController} from "ionic-angular";
 import {StoryService} from "./story.service";
 import {animate, style, transition, trigger} from "@angular/animations";
 import {Choice, StoryItem, StoryItemType} from "./story";
@@ -25,15 +24,12 @@ export class GamePage {
 
   storyItemTypes = StoryItemType; // required to make enum available on page
   maxItems = 5;
-
   character: Character;
-  info: Boolean = true;
   items: StoryItem[] = [];
   choice: Choice;
   usedIntuition: boolean = false;
 
-  constructor(private alertCtrl: AlertController,
-              private nativeAudio: NativeAudio,
+  constructor(private nativeAudio: NativeAudio,
               private storyService: StoryService,
               private parserService: ParserService,
               private storageService: StorageService) {
@@ -49,8 +45,7 @@ export class GamePage {
   }
 
   onTap() {
-    let storyItemType = this.items[this.items.length - 1].type;
-    if (storyItemType !== StoryItemType.END && (storyItemType === StoryItemType.NARRATIVE || storyItemType === StoryItemType.DIALOGUE_NPC || storyItemType === StoryItemType.DIALOGUE_PC || storyItemType === StoryItemType.CHAPTER)) {
+    if (!this.isInteractive(this.currentStoryItem())) {
       this.proceed();
     }
   }
@@ -84,26 +79,26 @@ export class GamePage {
     return this.parserService.parse(text, this.character);
   }
 
-  intuit() {
-    const alert = this.alertCtrl.create({
-      title: 'Intuition',
-      message: this.choice.intuition,
-      buttons: [
-        {
-          text: 'OK',
-          role: 'cancel',
-          handler: () => {
-            if (!this.usedIntuition) {
-              this.character.intuition--;
-              this.storageService.save(this.character);
-              this.usedIntuition = true;
-            }
-          }
-        }
-      ]
-    });
-    alert.present().then();
-  }
+  // intuit() {
+  //   const alert = this.alertCtrl.create({
+  //     title: 'Intuition',
+  //     message: this.choice.intuition,
+  //     buttons: [
+  //       {
+  //         text: 'OK',
+  //         role: 'cancel',
+  //         handler: () => {
+  //           if (!this.usedIntuition) {
+  //             this.character.intuition--;
+  //             this.storageService.save(this.character);
+  //             this.usedIntuition = true;
+  //           }
+  //         }
+  //       }
+  //     ]
+  //   });
+  //   alert.present().then();
+  // }
 
   private loadNextItem() {
     const nextItem = this.getUntilRequirementsMet();
@@ -117,14 +112,11 @@ export class GamePage {
       this.usedIntuition = false;
     }
     this.items.push(nextItem);
-
-    if (this.info && (this.items.length > 1 || this.currentStoryItem().type === StoryItemType.CHOICE || this.currentStoryItem().type === StoryItemType.NAME || this.currentStoryItem().type === StoryItemType.END))
-      this.info = false;
   }
 
   private requiresNewScreen(storyItem: StoryItem): boolean {
     return (this.items.length > 0 &&
-      (this.isInteractive(storyItem) || this.isInteractive(this.currentStoryItem()) || this.items.length == this.maxItems))
+      (this.isInteractive(storyItem) || this.isFullScreen(storyItem) || this.isInteractive(this.currentStoryItem()) || this.isFullScreen(this.currentStoryItem()) || this.items.length == this.maxItems))
   }
 
   private currentStoryItem() {
@@ -132,7 +124,11 @@ export class GamePage {
   }
 
   private isInteractive(storyItem: StoryItem): boolean {
-    return storyItem.type === StoryItemType.CHAPTER || storyItem.type === StoryItemType.CHOICE || storyItem.type === StoryItemType.NAME || storyItem.type === StoryItemType.END;
+    return storyItem.type === StoryItemType.CHOICE || storyItem.type === StoryItemType.NAME;
+  }
+
+  private isFullScreen(storyItem: StoryItem): boolean {
+    return storyItem.type === StoryItemType.CHAPTER || storyItem.type === StoryItemType.END;
   }
 
   private getUntilRequirementsMet(): StoryItem {
@@ -153,6 +149,4 @@ export class GamePage {
     }
     return true;
   }
-
-
 }

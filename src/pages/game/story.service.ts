@@ -11,6 +11,21 @@ export class StoryService {
     choices: ["FIGHTER", "THINKER"],
     items: [
       {
+        type: StoryItemType.TUTORIAL,
+        requirements: [],
+        content: "<b>TAP ANYWHERE</b> TO PROGRESS"
+      },
+      {
+        type: StoryItemType.TUTORIAL,
+        requirements: [],
+        content: "<b>SWIPE DOWN</b> TO HIDE MENU"
+      },
+      {
+        type: StoryItemType.TUTORIAL,
+        requirements: [],
+        content: "<b>SWIPE UP</b> TO SHOW MENU"
+      },
+      {
         type: StoryItemType.CHAPTER,
         requirements: [],
         content: "1"
