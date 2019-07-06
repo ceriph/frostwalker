@@ -15,7 +15,7 @@ export class HomePage {
               private storageService: StorageService) {
 
     this.storageService.load().then(result => {
-      this.existingData = (result != null);
+      this.existingData = (result != null) && result.index != 0;
     })
   }
 

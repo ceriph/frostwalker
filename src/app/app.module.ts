@@ -20,6 +20,7 @@ import {SettingsPage} from "../pages/settings/settings";
 import {StorageService} from "./storage.service";
 import {NativeAudio} from "@ionic-native/native-audio";
 import {MyHammerConfig} from "./gestures";
+import {HttpClientModule} from "@angular/common/http";
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import {MyHammerConfig} from "./gestures";
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    HttpClientModule,
     IonicModule.forRoot(MyApp),
     IonicStorageModule.forRoot()
   ],

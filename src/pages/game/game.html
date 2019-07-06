@@ -3,23 +3,24 @@
     <div class="content center">
       <div *ngFor="let item of items" [@fadeIn]>
         <div *ngIf="item.type === storyItemTypes.CHAPTER">
-          <div class="font-large clear center spaced-large">Chapter {{item.content}}</div>
+          <div class="font-large clear center spaced-large">{{chapterTitle(item.content)}}</div>
           <div class="clear spaced-border"></div>
+          <div class="medium clear center spaced"><i>{{chapterContent(item.content)}}</i></div>
         </div>
 
         <div *ngIf="item.type === storyItemTypes.NARRATIVE">
-          <div class="font-small box clear center spaced">{{parse(item.content)}}</div>
+          <div class="font-small box clear center spaced border-left border-right" [innerHtml]="parse(item.content)"></div>
           <!--<div class="clear spaced-border"></div>-->
         </div>
 
         <div class="clear left full spaced" *ngIf="item.type === storyItemTypes.DIALOGUE_NPC">
           <div class="indicator-left left"></div>
-          <div class="font-small font-italic box left wide">"{{parse(item.content)}}"</div>
+          <div class="font-small font-italic box left wide border-right" [innerHtml]="parse(item.content)"></div>
         </div>
 
         <div class="clear right full spaced" *ngIf="item.type === storyItemTypes.DIALOGUE_PC">
           <div class="indicator-right right"></div>
-          <div class="font-small font-italic box right wide">"{{parse(item.content)}}"</div>
+          <div class="font-small font-italic box right wide border-left" [innerHtml]="parse(item.content)"></div>
         </div>
 
         <ion-buttons *ngIf="item.type === storyItemTypes.CHOICE">

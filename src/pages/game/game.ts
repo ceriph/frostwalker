@@ -23,7 +23,7 @@ import {Sounds} from "./sounds";
 export class GamePage {
 
   storyItemTypes = StoryItemType; // required to make enum available on page
-  maxItems = 5;
+  maxItems = 4;
   character: Character;
   items: StoryItem[] = [];
   choice: Choice;
@@ -79,27 +79,6 @@ export class GamePage {
     return this.parserService.parse(text, this.character);
   }
 
-  // intuit() {
-  //   const alert = this.alertCtrl.create({
-  //     title: 'Intuition',
-  //     message: this.choice.intuition,
-  //     buttons: [
-  //       {
-  //         text: 'OK',
-  //         role: 'cancel',
-  //         handler: () => {
-  //           if (!this.usedIntuition) {
-  //             this.character.intuition--;
-  //             this.storageService.save(this.character);
-  //             this.usedIntuition = true;
-  //           }
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   alert.present().then();
-  // }
-
   private loadNextItem() {
     const nextItem = this.getUntilRequirementsMet();
     if (this.requiresNewScreen(nextItem)) {
@@ -109,8 +88,10 @@ export class GamePage {
 
     if (nextItem.type === StoryItemType.CHOICE) {
       this.choice = Choice.fromString(nextItem.content);
-      this.usedIntuition = false;
     }
+
+    console.log(nextItem.type);
+    console.log(nextItem.content);
     this.items.push(nextItem);
   }
 
@@ -148,5 +129,13 @@ export class GamePage {
       }
     }
     return true;
+  }
+
+  private chapterTitle(content: String): String {
+    return content.split('|')[0];
+  }
+
+  private chapterContent(content: String): String {
+    return content.split('|')[1];
   }
 }

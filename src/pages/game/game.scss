@@ -23,7 +23,7 @@ page-game {
   .wrapper {
     position: relative;
     width: 100%;
-    height: 90%;
+    height: 100%;
     margin: 0;
   }
 
@@ -80,6 +80,14 @@ page-game {
     color: $box-text-color;
   }
 
+  .border-left {
+    border-left: 1px solid $box-text-color;
+  }
+
+  .border-right {
+    border-right: 1px solid $box-text-color;
+  }
+
   .spaced {
     margin-bottom: 1rem;
   }
@@ -109,5 +117,10 @@ page-game {
 
     border-top: 2rem solid $box-background-color;
     border-right: 2rem solid $background-color;
+  }
+
+  strong {
+    @extend .font-medium;
+    font-weight: bold;
   }
 }

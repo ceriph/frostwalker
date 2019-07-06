@@ -12,7 +12,14 @@ export class StoryItem {
 }
 
 export enum StoryItemType {
-  TUTORIAL, NAME, CHAPTER, NARRATIVE, DIALOGUE_NPC, DIALOGUE_PC, CHOICE, END
+  TUTORIAL = 'TUTORIAL',
+  NAME = 'NAME',
+  CHAPTER = 'CHAPTER',
+  NARRATIVE = 'NARRATIVE',
+  DIALOGUE_NPC = 'DIALOGUE_NPC',
+  DIALOGUE_PC = 'DIALOGUE_PC',
+  CHOICE = 'CHOICE',
+  END = 'END'
 }
 
 export class Choice {

@@ -1,0 +1,73 @@
+{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "You see the twins, Jimmy and Tasha, packing up their things. They both give you a smile and motion for you to hurry up."
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "It only takes a few minutes for your group to paco the camp up and continue on your journey towards the village of Wellspring."
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "You had been travelling with this group for three days now, as part of your contract with the mercenary company, Chain of Swords."
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "Taskmaster Peele had assigned you, and four others, to investigate a supposed demonic cult in the area."
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "The church in your hometown, Freeport, had offered an attractive sum of gold to the company to help; they'd sent a priest named father Aemon to investigate two weeks prior but hadn't heard from him since."
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "The company you found yourself with was as good as any you’d had previous"
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "Argus and Vara made a great pair, opposites that got on better than they’d care to admit"
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "Jimmy and Tasha sometimes seemed like the same person, finished each-others thoughts in an eccentric manner. They were clearly good-natured though and had an affinity for magic that was comforting"
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "The day goes by quickly, as you listen to stories from the other members of the group. Sadly Vara doesn’t reveal how she got the scar on her neck"
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "Argus on the other hand revells in the events that led to him losing an eye, a grand tale involving a dwarven princess which you aren’t sure you believe"
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "As the sun begins to set, you draw your tired eyes along the dirt road ahead and notice torchlight flickering in the distance."
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "You can’t help but feel relieved, it has been three full days of travel and you are all exhausted and in need of a proper meal."
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "Jimmy almost reads your mind, as he exclaims"
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "Finally! Me and Tasha are starving."
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "Vara looks back over her shoulder"
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "Remember we are here for a purpose...but yes, I suppose a proper meal wouldn’t go amiss"
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "Argus nudges you in the side and leans in"
+},{
+    type: StoryItemType.X,
+    requirements: [],
+    content: "So she’s got a soft spot after all eh?"
+},
