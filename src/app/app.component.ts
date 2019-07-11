@@ -1,17 +1,17 @@
-import { Component } from '@angular/core';
-import { Platform } from 'ionic-angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
+import {Component} from '@angular/core';
+import {Platform} from 'ionic-angular';
+import {StatusBar} from '@ionic-native/status-bar/ngx';
+import {SplashScreen} from '@ionic-native/splash-screen/ngx';
 
-import { TabsPage } from '../pages/tabs/tabs';
-import {NativeAudio} from "@ionic-native/native-audio";
+import {TabsPage} from '../pages/tabs/tabs';
+import {NativeAudio} from "@ionic-native/native-audio/ngx";
 import {Sounds} from "../pages/game/sounds";
 
 @Component({
   templateUrl: 'app.html'
 })
 export class MyApp {
-  rootPage:any = TabsPage;
+  rootPage: any = TabsPage;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private nativeAudio: NativeAudio) {

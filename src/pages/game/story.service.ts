@@ -5,10 +5,19 @@ import {HttpClient} from "@angular/common/http";
 @Injectable()
 export class StoryService {
 
+  ready: boolean = false;
   story: Story;
 
   constructor(private http: HttpClient) {  // Make the HTTP request:
-    this.http.get('assets/data.json').subscribe(data => this.story = <Story>data);
+  }
+
+  load() {
+    console.log("Loading story...");
+    this.http.get('assets/data.json').subscribe(data => {
+      this.story = <Story>data;
+      console.log("Loaded story data");
+      this.ready = true;
+    });
   }
 
   get(): Story {
@@ -16,6 +25,7 @@ export class StoryService {
   }
 
   getItem(item: number): StoryItem {
+    console.log("Getting item", item);
     return this.story.items[item];
   }
 

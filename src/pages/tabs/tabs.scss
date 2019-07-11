@@ -1,7 +1,9 @@
 page-tabs {
+  @import '../../theme/variables';
 
   .tab-button {
     background-color: $button-background-color !important;
+    color: $text-color-shade !important;
     padding: 8rem;
   }
 }

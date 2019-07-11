@@ -2,12 +2,12 @@ export class Character {
   name: string;
   index: number;
   choices: string[];
-  intuition: number;
+  tonic: number;
 
   constructor() {
     this.name = "";
     this.index = 0;
     this.choices = [];
-    this.intuition = 10;
+    this.tonic = 0;
   }
 }

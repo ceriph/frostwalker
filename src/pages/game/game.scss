@@ -1,25 +1,6 @@
 page-game {
   @import '../../theme/variables';
 
-  .clear {
-    clear: both;
-  }
-
-  .left {
-    float: left;
-  }
-
-  .right {
-    float: right;
-  }
-
-  .center {
-    float: left;
-    width: 100%;
-    margin: 0 auto;
-    text-align: center;
-  }
-
   .wrapper {
     position: relative;
     width: 100%;
@@ -86,14 +67,6 @@ page-game {
 
   .border-right {
     border-right: 1px solid $box-text-color;
-  }
-
-  .spaced {
-    margin-bottom: 1rem;
-  }
-
-  .spaced-large {
-    margin-bottom: 3rem;
   }
 
   .spaced-border {

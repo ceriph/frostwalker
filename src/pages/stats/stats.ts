@@ -1,5 +1,4 @@
 import {Component} from '@angular/core';
-import {NavController} from 'ionic-angular';
 import {StoryService} from "../game/story.service";
 import {StorageService} from "../../app/storage.service";
 import {Character} from "../game/character";
@@ -11,11 +10,9 @@ import {Character} from "../game/character";
 export class StatsPage {
 
   character: Character;
-
   progress: number;
 
-  constructor(public navCtrl: NavController,
-              private storyService: StoryService,
+  constructor(private storyService: StoryService,
               private storageService: StorageService) {
 
     storageService.load().then(character => {

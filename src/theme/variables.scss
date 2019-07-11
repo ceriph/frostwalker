@@ -32,6 +32,7 @@ $colors: (
 
   charcoal: #161519,
   grey: #212026,
+  shadow: #8E8261,
   wheat: #E2CF9A,
   beige: #F5F7DC,
   purple: #0F0326
@@ -57,11 +58,12 @@ $colors: (
 // default are overridden.
 $background-color: color($colors, charcoal);
 $text-color: color($colors, wheat);
+$text-color-shade: color($colors, shadow);
 $box-background-color: color($colors, grey);
 $box-text-color: color($colors, wheat);
 $button-background-color: color($colors, grey);
 $button-text-color: color($colors, wheat);
-$border-color: color($colors, purple);
+$border-color: color($colors, wheat);
 
 @import "ionic.theme.default";
 

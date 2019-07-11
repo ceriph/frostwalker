@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 import {AlertController, NavController} from 'ionic-angular';
 import {StorageService} from "../../app/storage.service";
 
@@ -8,10 +8,9 @@ import {StorageService} from "../../app/storage.service";
 })
 export class SettingsPage {
 
-  constructor(public navCtrl: NavController,
+  constructor(private navCtrl: NavController,
               private alertCtrl: AlertController,
               private storageService: StorageService) {
-
   }
 
   reset() {
@@ -33,6 +32,7 @@ export class SettingsPage {
           text: 'Reset',
           handler: () => {
             this.storageService.reset();
+            this.navCtrl.parent.select(0); // jump to home screen
           }
         }
       ]

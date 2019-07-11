@@ -21,3 +21,30 @@ body {
 }
 
 .scroll-content{overflow-y: auto;}
+
+.left {
+  float: left;
+}
+
+.clear {
+  clear: both;
+}
+
+.right {
+  float: right;
+}
+
+.center {
+  float: left;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.spaced {
+  margin-bottom: 1rem;
+}
+
+.spaced-large {
+  margin-bottom: 3rem;
+}

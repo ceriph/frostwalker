@@ -5,8 +5,9 @@ import {Choice, StoryItem, StoryItemType} from "./story";
 import {Character} from "./character";
 import {ParserService} from "./parser.service";
 import {StorageService} from "../../app/storage.service";
-import {NativeAudio} from "@ionic-native/native-audio";
+import {NativeAudio} from "@ionic-native/native-audio/ngx";
 import {Sounds} from "./sounds";
+import {AdMobPro} from "@ionic-native/admob-pro/ngx";
 
 @Component({
   selector: 'page-game',
@@ -27,14 +28,19 @@ export class GamePage {
   character: Character;
   items: StoryItem[] = [];
   choice: Choice;
-  usedIntuition: boolean = false;
 
   constructor(private nativeAudio: NativeAudio,
+              private ad: AdMobPro,
               private storyService: StoryService,
               private parserService: ParserService,
               private storageService: StorageService) {
 
-    storageService.load().then((character) => {
+    this.prepareAd();
+    document.addEventListener('onAdDismiss', () => {
+      this.proceed();
+      this.prepareAd();
+    });
+    this.storageService.load().then((character) => {
       this.character = character;
 
       if (this.character == null)
@@ -95,6 +101,28 @@ export class GamePage {
     this.items.push(nextItem);
   }
 
+  prepareAd() {
+    console.log("Preparing ad...");
+    this.ad.prepareInterstitial( {
+      // adId: 'ca-app-pub-4458284068451323/1153909851',
+      isTesting: true,
+      autoShow: false
+    }).then(() => console.log("Ad ready"))
+  }
+
+  showAd() {
+    console.log("Showing ad");
+    this.ad.showInterstitial();
+  }
+
+  chapterTitle(content: String): String {
+    return content.split('|')[0];
+  }
+
+  chapterContent(content: String): String {
+    return content.split('|')[1];
+  }
+
   private requiresNewScreen(storyItem: StoryItem): boolean {
     return (this.items.length > 0 &&
       (this.isInteractive(storyItem) || this.isFullScreen(storyItem) || this.isInteractive(this.currentStoryItem()) || this.isFullScreen(this.currentStoryItem()) || this.items.length == this.maxItems))
@@ -105,11 +133,11 @@ export class GamePage {
   }
 
   private isInteractive(storyItem: StoryItem): boolean {
-    return storyItem.type === StoryItemType.CHOICE || storyItem.type === StoryItemType.NAME;
+    return storyItem.type === StoryItemType.CHOICE || storyItem.type === StoryItemType.NAME || storyItem.type === StoryItemType.CHAPTER_END;
   }
 
   private isFullScreen(storyItem: StoryItem): boolean {
-    return storyItem.type === StoryItemType.CHAPTER || storyItem.type === StoryItemType.END;
+    return storyItem.type === StoryItemType.CHAPTER || storyItem.type === StoryItemType.END || storyItem.type === StoryItemType.CHAPTER_END;
   }
 
   private getUntilRequirementsMet(): StoryItem {
@@ -129,13 +157,5 @@ export class GamePage {
       }
     }
     return true;
-  }
-
-  private chapterTitle(content: String): String {
-    return content.split('|')[0];
-  }
-
-  private chapterContent(content: String): String {
-    return content.split('|')[1];
   }
 }

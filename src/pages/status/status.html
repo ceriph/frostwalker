@@ -1,0 +1,15 @@
+<ion-content>
+  <div *ngIf="character">
+    <h1 class="center spaced-large">Tonic</h1>
+    <div class="clear center spaced">
+      Tonic can be used to extend your dreams, unlocking choices that may give you better insight into the story. It is
+      not necessary to complete the story however.
+    </div>
+    <div class="clear center spaced">
+      You currently have {{character.tonic}} tonic
+    </div>
+    <ion-buttons>
+      <button class="menu-button" [disabled]="character.tonic >= 1" (click)="rewardTonic()">Watch Ad (+1 tonic)</button>
+    </ion-buttons>
+  </div>
+</ion-content>

@@ -19,15 +19,16 @@ export enum StoryItemType {
   DIALOGUE_NPC = 'DIALOGUE_NPC',
   DIALOGUE_PC = 'DIALOGUE_PC',
   CHOICE = 'CHOICE',
+  CHAPTER_END = 'CHAPTER_END',
   END = 'END'
 }
 
 export class Choice {
-  intuition: string;
+  text: string;
   options: Option[];
 
-  constructor(intuition: string, options: Option[]) {
-    this.intuition = intuition;
+  constructor(text: string, options: Option[]) {
+    this.text = text;
     this.options = options;
   }
 

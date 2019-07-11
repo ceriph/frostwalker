@@ -1,7 +1,0 @@
-\n[“]*["]*([\w .,;$'’?!…-]+)[”]*["]*.\n
-
-{
-    type: StoryItemType.X,
-    requirements: [],
-    content: "$1"
-},
