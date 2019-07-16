@@ -6,19 +6,32 @@ import {Injectable} from "@angular/core";
 export class StorageService {
   SAVE_KEY = "character";
 
-  constructor (private storage: Storage) {}
+  character: Character;
+
+  constructor(private storage: Storage) {
+  }
+
+  init(): Promise<string> {
+    console.log("Loading character...");
+    return this.storage.get(this.SAVE_KEY)
+  }
+
+  set(character: Character) {
+    console.log("Setting character state...");
+    this.character = character;
+  }
 
   save(character: Character) {
+    this.character = character;
     this.storage.set(this.SAVE_KEY, JSON.stringify(character));
   }
 
-  load(): Promise<Character> {
-    return this.storage.get(this.SAVE_KEY).then((characterString) => {
-      return JSON.parse(characterString);
-    });
+  get(): Character {
+    return this.character;
   }
 
   reset() {
-    this.save(new Character);
+    this.character = new Character();
+    this.save(this.character);
   }
 }

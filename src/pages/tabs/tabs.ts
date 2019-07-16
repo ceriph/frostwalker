@@ -1,7 +1,7 @@
 import {Component} from '@angular/core';
 
-import {StatsPage} from '../stats/stats';
-import {StatusPage} from '../status/status';
+import {RecordsPage} from '../records/records';
+import {TonicPage} from '../tonic/tonic';
 import {HomePage} from '../home/home';
 import {SettingsPage} from "../settings/settings";
 import {GamePage} from "../game/game";
@@ -14,9 +14,9 @@ export class TabsPage {
 
   tabHome = HomePage;
   tabGame = GamePage;
-  tabStats = StatsPage;
+  tabRecords = RecordsPage;
+  tabTonic = TonicPage;
   tabSettings = SettingsPage;
-  tabStatus = StatusPage;
 
   constructor() {}
 }

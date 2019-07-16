@@ -3,8 +3,8 @@ import {BrowserModule, HAMMER_GESTURE_CONFIG} from '@angular/platform-browser';
 import {IonicApp, IonicErrorHandler, IonicModule} from 'ionic-angular';
 import {MyApp} from './app.component';
 
-import {StatsPage} from '../pages/stats/stats';
-import {StatusPage} from '../pages/status/status';
+import {RecordsPage} from '../pages/records/records';
+import {TonicPage} from '../pages/tonic/tonic';
 import {HomePage} from '../pages/home/home';
 import {TabsPage} from '../pages/tabs/tabs';
 
@@ -26,8 +26,8 @@ import {AdMobPro} from "@ionic-native/admob-pro/ngx";
 @NgModule({
   declarations: [
     MyApp,
-    StatsPage,
-    StatusPage,
+    RecordsPage,
+    TonicPage,
     HomePage,
     TabsPage,
     GamePage,
@@ -43,8 +43,8 @@ import {AdMobPro} from "@ionic-native/admob-pro/ngx";
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    StatsPage,
-    StatusPage,
+    RecordsPage,
+    TonicPage,
     HomePage,
     TabsPage,
     GamePage,

@@ -19,7 +19,7 @@ Sign apk:
 
 ### Story
 
-* Prologue - battle, frost, enemy - review
+* Prologue - battle, frost, ultimate enemy? - review
 * Chapter 1 - waking up, intuition to dreamer, tonic, protectors, shifters, argus, vara, twins - review
 * Chapter 2 - travel, vara, jimmy, tasha, stories - review
 * Chapter 3 - wellspring, fire 
@@ -33,17 +33,21 @@ Sign apk:
 
 ### Features
 
-* Records (choices)
+* Records 
+  * Choices
+  * Attributes / behaviour / traits
 * Premium choices (tonic)
  
 ### Monetization
 
 * Reward ads
-  * Themes
-  * Save slots
+  * Themes?
+  * Save slots?
 * Banner ads?
 
 ### Bugs
 
 * Name text entry is awkward
 * Reset data issues! Look at with save slots?
+* Update tab state on change
+* Continue after a few seconds if ad doesn't show?

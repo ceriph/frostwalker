@@ -1,27 +1,27 @@
-import {Story, StoryItem} from "./story";
+import {Option, Story, StoryItem} from "./story";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
+import {Observable} from "rxjs/Observable";
 
 @Injectable()
 export class StoryService {
 
-  ready: boolean = false;
   story: Story;
 
   constructor(private http: HttpClient) {  // Make the HTTP request:
   }
 
-  load() {
+  init(): Observable<Story> {
     console.log("Loading story...");
-    this.http.get('assets/data.json').subscribe(data => {
-      this.story = <Story>data;
-      console.log("Loaded story data");
-      this.ready = true;
-    });
+    return <Observable<Story>>this.http.get('assets/data.json');
   }
 
-  get(): Story {
-    return this.story;
+  set(story: Story) {
+    this.story = story;
+  }
+
+  getOptions(): Option[] {
+    return this.story.options;
   }
 
   getItem(item: number): StoryItem {
@@ -30,6 +30,9 @@ export class StoryService {
   }
 
   count(): number {
+    if(!this.story)
+      return 0;
+
     return this.story.items.length;
   }
 }

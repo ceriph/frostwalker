@@ -1,7 +1,7 @@
 export class Story {
   title: string;
   description: string;
-  choices: string[];
+  options: Option[];
   items: StoryItem[];
 }
 

@@ -1,0 +1,5 @@
+<ion-content padding>
+  <div class="box spaced font-medium">Story progress: {{progress}}%</div>
+  <h1 class="spaced center font-large">Choices</h1>
+  <div class="box spaced font-medium" *ngFor="let option of options">{{option.label}}</div>
+</ion-content>

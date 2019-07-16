@@ -24,7 +24,7 @@ import {AdMobPro} from "@ionic-native/admob-pro/ngx";
 export class GamePage {
 
   storyItemTypes = StoryItemType; // required to make enum available on page
-  maxItems = 4;
+  maxItems = 3;
   character: Character;
   items: StoryItem[] = [];
   choice: Choice;
@@ -40,14 +40,16 @@ export class GamePage {
       this.proceed();
       this.prepareAd();
     });
-    this.storageService.load().then((character) => {
-      this.character = character;
 
-      if (this.character == null)
-        this.character = new Character;
+    this.character = this.storageService.get();
+    if (this.character == null)
+      this.character = new Character;
 
-      this.loadNextItem();
-    });
+    this.loadNextItem();
+  }
+
+  ionViewWillEnter() {
+    this.character = this.storageService.get();
   }
 
   onTap() {
@@ -65,7 +67,7 @@ export class GamePage {
   }
 
   proceed() {
-    this.nativeAudio.play(Sounds.tap.id).then();
+    // this.nativeAudio.play(Sounds.tap.id).then();
     this.character.index++;
     this.loadNextItem();
   }
@@ -103,7 +105,7 @@ export class GamePage {
 
   prepareAd() {
     console.log("Preparing ad...");
-    this.ad.prepareInterstitial( {
+    this.ad.prepareInterstitial({
       // adId: 'ca-app-pub-4458284068451323/1153909851',
       isTesting: true,
       autoShow: false

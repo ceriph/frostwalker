@@ -48,3 +48,31 @@ body {
 .spaced-large {
   margin-bottom: 3rem;
 }
+
+.content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: $background-color;
+  color: $text-color;
+}
+
+.font-small {
+  font-size: 1.5rem;
+}
+
+.font-medium {
+  font-size: 2rem;
+}
+
+.font-large {
+  font-size: 3rem;
+}
+
+.icon-margin-left {
+  margin-left: 12px;
+}
+
+.icon-margin-right {
+  margin-right: 12px;
+}

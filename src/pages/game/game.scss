@@ -8,14 +8,6 @@ page-game {
     margin: 0;
   }
 
-  .content {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: $background-color;
-    color: $text-color;
-  }
-
   .info-small {
     position: relative;
     opacity: 0.5;
@@ -32,18 +24,6 @@ page-game {
 
   .wide {
     width: 80%;
-  }
-
-  .font-small {
-    font-size: 1.5rem;
-  }
-
-  .font-medium {
-    font-size: 2rem;
-  }
-
-  .font-large {
-    font-size: 3rem;
   }
 
   .font-italic {
