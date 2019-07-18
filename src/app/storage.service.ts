@@ -1,12 +1,12 @@
-import {Character} from "../pages/game/character";
+import {Character, Data} from "../pages/game/character";
 import {Storage} from "@ionic/storage";
 import {Injectable} from "@angular/core";
 
 @Injectable()
 export class StorageService {
-  SAVE_KEY = "character";
+  SAVE_KEY = "fw-save-data";
 
-  character: Character;
+  data: Data;
 
   constructor(private storage: Storage) {
   }
@@ -16,22 +16,40 @@ export class StorageService {
     return this.storage.get(this.SAVE_KEY)
   }
 
-  set(character: Character) {
-    console.log("Setting character state...");
-    this.character = character;
+  getData(): Data {
+    return this.data;
   }
 
-  save(character: Character) {
-    this.character = character;
-    this.storage.set(this.SAVE_KEY, JSON.stringify(character));
+  get(slot?: number): Character {
+    if (!slot)
+      slot = this.data.lastLoaded;
+
+    return this.data.characters[slot];
   }
 
-  get(): Character {
-    return this.character;
+  set(data: Data) {
+    console.log("Setting data state...");
+    this.data = data;
   }
 
-  reset() {
-    this.character = new Character();
-    this.save(this.character);
+  save(character: Character, slot?: number) {
+    if(!slot)
+      slot = this.data.lastLoaded;
+
+    this.data.characters[slot] = character;
+    this.saveData(this.data);
+  }
+
+  saveData(data: Data) {
+    this.data = data;
+    this.storage.set(this.SAVE_KEY, JSON.stringify(data));
+  }
+
+  reset(slot: number) {
+    this.save(new Character(), slot);
+    if(slot > 0) {
+      this.data.characters = this.data.characters.filter((character, index) => index !== slot);
+      this.saveData(this.data);
+    }
   }
 }

@@ -1,5 +1,19 @@
 <ion-content padding>
+  <div *ngIf="data" class="spaced-large">
+    <div class="spaced center"><h1 class="font-large">Data</h1></div>
+    <div class="center font-small spaced"><i>Currently loaded: Slot {{data.lastLoaded + 1}}</i></div>
+    <div *ngFor="let character of data.characters; let i = index" class="clear left spaced full font-medium">
+      <div class="left">Slot {{i+1}} - {{!character.name ? 'Player' : character.name}}</div>
+      <button class="box-small spaced right icon-margin-right" (tap)="reset(i)"> <ion-icon name="trash"></ion-icon></button>
+      <button class="box-small spaced right icon-margin-right" [disabled]="data.lastLoaded === i" (tap)="load(i)"> <ion-icon name="play"></ion-icon></button>
+      <div class="clear spaced-border"></div>
+    </div>
+    <button *ngIf="data.characters.length < 2" class="box full font-medium" (tap)="unlockSlot()"><ion-icon class="icon-margin-right" name="videocam"></ion-icon>Watch ad (+1 slot)</button>
+  </div>
+  <div class="center"><h1 class="font-large">Themes</h1></div>
   <ion-buttons>
-    <button class="menu-button" (click)="reset()"><ion-icon class="icon-margin-right" name="undo"></ion-icon>reset data</button>
+    <button class="box full spaced font-medium" [disabled]="isSelected(themes.darkWheat)" (tap)="setTheme(themes.darkWheat)"><ion-icon *ngIf="isSelected(themes.darkWheat)" class="icon-margin-right" name="checkmark"></ion-icon>Dark Wheat</button>
+    <button class="box full spaced font-medium" [disabled]="isSelected(themes.lightWheat)" (tap)="setTheme(themes.lightWheat)"><ion-icon *ngIf="isSelected(themes.lightWheat)" class="icon-margin-right" name="checkmark"></ion-icon>Light Wheat</button>
+    <button class="box full spaced font-medium" [disabled]="isSelected(themes.lightFrost)" (tap)="setTheme(themes.lightFrost)"><ion-icon *ngIf="isSelected(themes.lightFrost)" class="icon-margin-right" name="checkmark"></ion-icon>Light Frost</button>
   </ion-buttons>
 </ion-content>

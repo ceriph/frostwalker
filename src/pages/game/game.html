@@ -11,7 +11,7 @@
         <div *ngIf="item.type === storyItemTypes.CHAPTER_END">
           <div class="font-large clear center spaced-large">Chapter End</div>
           <div class="clear spaced-border"></div>
-          <div class="medium clear center spaced"><i>The following short advert helps ensure this game remains totally free.<br /><br /> Thank you for your attention, <br /> Matt</i></div>
+          <div class="medium clear center spaced"><i>The following short advert helps ensure this game remains totally free.<br /><br /> Thank you for your attention</i></div>
           <button class="font-medium box clear center" (tap)="showAd()">I UNDERSTAND</button>
         </div>
 
@@ -33,17 +33,20 @@
           <div class="font-medium info clear center spaced-large" [innerHtml]="choice.text"></div>
           <div class="clear spaced-border"></div>
           <button class="font-medium box clear center spaced" *ngFor="let option of choice.options" (tap)="makeChoice(option.name)">
+            <ion-icon *ngIf="option.name.startsWith('TONIC')" [disabled]="character.tonic == 0" name="flask"></ion-icon>
             {{option.label}}
           </button>
         </ion-buttons>
 
         <div *ngIf="item.type === storyItemTypes.NAME">
           <label class="font-large spaced-large">ENTER NAME</label>
-           <div class="clear spaced"></div>
-           <div class="clear spaced-border"></div>
-          <input class="font-medium box clear center spaced-large" type="text" name="name" maxlength="16" [(ngModel)]="character.name" (focus)="hideTabs()" (blur)="showTabs()">
+          <div class="clear spaced"></div>
           <div class="clear spaced-border"></div>
-          <button class="font-medium box clear center" (tap)="acceptName()">ACCEPT</button>
+          <form (submit)="acceptName()">
+            <input class="font-medium box clear center spaced-large" type="text" name="name" maxlength="16" [(ngModel)]="character.name" (focus)="hideTabs()" (blur)="showTabs()" onK>
+            <div class="clear spaced-border"></div>
+            <button class="font-medium box clear center" type="submit">ACCEPT</button>
+          </form>
         </div>
 
         <div class="font-large clear center spaced" *ngIf="item.type === storyItemTypes.END">

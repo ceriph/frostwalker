@@ -33,21 +33,19 @@ Sign apk:
 
 ### Features
 
-* Records 
-  * Choices
-  * Attributes / behaviour / traits
 * Premium choices (tonic)
- 
-### Monetization
-
-* Reward ads
-  * Themes?
-  * Save slots?
-* Banner ads?
 
 ### Bugs
 
-* Name text entry is awkward
-* Reset data issues! Look at with save slots?
-* Update tab state on change
-* Continue after a few seconds if ad doesn't show?
+* Ad events mix up vs proactive carry on
+
+### Nice to haves (func)
+
+* Display theme preview
+* Logo design
+* theme tuning
+
+### Nice to haves (tech)
+
+* Sound service for easier web debugging
+* prod/test flags for ad testing

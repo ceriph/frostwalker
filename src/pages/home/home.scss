@@ -1,13 +1,4 @@
 page-home {
-  @import "../../theme/variables";
-
-  .content {
-    position: relative;
-    top: 50%;
-    transform: translateY(-50%);
-    background-color: $background-color;
-    color: $text-color;
-  }
 
   .title {
     text-align: center;
@@ -15,20 +6,9 @@ page-home {
     font-weight: lighter;
   }
 
-  .menu-button {
-    width: 100%;
-    height: 8rem;
-    margin-top: 3rem;
-
-    font-size: 2.5rem;
-    font-weight: lighter;
-
-    background-color: $button-background-color;
-    color: $text-color;
-  }
-
   .logo {
     width: 80%;
+    height: 40%;
     margin: 0 auto;
   }
 }

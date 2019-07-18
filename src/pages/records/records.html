@@ -1,5 +1,20 @@
-<ion-content padding>
-  <div class="box spaced font-medium">Story progress: {{progress}}%</div>
-  <h1 class="spaced center font-large">Choices</h1>
-  <div class="box spaced font-medium" *ngFor="let option of options">{{option.label}}</div>
+<ion-content padding *ngIf="options">
+  <div class="spaced-large">
+    <div class="clear spaced center"><h1 class="font-large">Progress</h1></div>
+    <div class="clear box spaced font-small">Completion: {{getCompletion()}}% (all characters)</div>
+    <div *ngFor="let character of data.characters" class="clear box spaced font-medium">{{!character.name ? 'Player' : character.name}}'s story: {{getProgress(character)}}%</div>
+  </div>
+  <div>
+    <div class="spaced center"><h1 class="font-large">{{!character.name ? 'Player' : character.name}}'s Choices</h1></div>
+    <div class="clear box spaced font-small" *ngFor="let option of options">{{option.label}}</div>
+    <div class="clear box spaced font-small">TEST</div>
+    <div class="clear box spaced font-small">TEST</div>
+    <div class="clear box spaced font-small">TEST</div>
+    <div class="clear box spaced font-small">TEST</div>
+    <div class="clear box spaced font-small">TEST</div>
+    <div class="clear box spaced font-small">TEST</div>
+    <div class="clear box spaced font-small">TEST</div>
+    <div class="clear box spaced font-small">TEST</div>
+    <div class="clear box spaced font-small" *ngIf="options.length === 0">None</div>
+  </div>
 </ion-content>

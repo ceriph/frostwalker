@@ -1,5 +1,4 @@
 page-game {
-  @import '../../theme/variables';
 
   .wrapper {
     position: relative;
@@ -18,58 +17,8 @@ page-game {
     font-size: 1rem;
   }
 
-  .full {
-    width: 100%;
-  }
-
   .wide {
-    width: 80%;
-  }
-
-  .font-italic {
-    font-style: italic;
-  }
-
-  .font-small, .font-medium, .font-large {
-    font-weight: lighter;
-  }
-
-  .box {
-    padding: 2rem;
-
-    background-color: $box-background-color;
-    color: $box-text-color;
-  }
-
-  .border-left {
-    border-left: 1px solid $box-text-color;
-  }
-
-  .border-right {
-    border-right: 1px solid $box-text-color;
-  }
-
-  .spaced-border {
-    margin: 0 auto 3rem;
-    border-bottom: 1px solid $border-color;
-    width: 60%;
-    opacity: 50%;
-  }
-
-  .indicator-left {
-    width: 0;
-    height: 0;
-
-    border-top: 2rem solid $box-background-color;
-    border-left: 2rem solid $background-color;
-  }
-
-  .indicator-right {
-    width: 0;
-    height: 0;
-
-    border-top: 2rem solid $box-background-color;
-    border-right: 2rem solid $background-color;
+    width: 90%;
   }
 
   strong {

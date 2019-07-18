@@ -22,6 +22,7 @@ import {NativeAudio} from "@ionic-native/native-audio/ngx";
 import {MyHammerConfig} from "./gestures";
 import {HttpClientModule} from "@angular/common/http";
 import {AdMobPro} from "@ionic-native/admob-pro/ngx";
+import {ThemeService} from "./theme.service";
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import {AdMobPro} from "@ionic-native/admob-pro/ngx";
     StoryService,
     ParserService,
     StorageService,
+    ThemeService,
     AnimationService,
     NativeAudio,
     {provide: HAMMER_GESTURE_CONFIG, useClass: MyHammerConfig},

@@ -1,5 +1,8 @@
 // http://ionicframework.com/docs/theming/
 @import '../theme/variables';
+@import '../theme/theme.darkWheat';
+@import '../theme/theme.lightWheat';
+@import '../theme/theme.lightFrost';
 
 // App Global Sass
 // --------------------------------------------------
@@ -22,12 +25,14 @@ body {
 
 .scroll-content{overflow-y: auto;}
 
-.left {
-  float: left;
-}
+// Mixins
 
 .clear {
   clear: both;
+}
+
+.left {
+  float: left;
 }
 
 .right {
@@ -49,12 +54,8 @@ body {
   margin-bottom: 3rem;
 }
 
-.content {
-  position: relative;
-  top: 50%;
-  transform: translateY(-50%);
-  background-color: $background-color;
-  color: $text-color;
+.full {
+  width: 100%;
 }
 
 .font-small {
@@ -75,4 +76,59 @@ body {
 
 .icon-margin-right {
   margin-right: 12px;
+}
+
+.font-italic {
+  font-style: italic;
+}
+
+.font-small, .font-medium, .font-large {
+  font-weight: lighter;
+}
+
+// Elements
+
+.content {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.box {
+  padding: 1.5rem;
+}
+
+.box-small {
+  padding: 1rem;
+}
+
+.border-left {
+  border-left: 1px solid;
+}
+
+.border-right {
+  border-right: 1px solid;
+}
+
+.spaced-border {
+  margin: 0 auto 3rem;
+  border-bottom: 1px solid;
+  width: 60%;
+  opacity: 50%;
+}
+
+.indicator-left {
+  width: 0;
+  height: 0;
+
+  border-top: 2rem solid;
+  border-left: 2rem solid;
+}
+
+.indicator-right {
+  width: 0;
+  height: 0;
+
+  border-top: 2rem solid;
+  border-right: 2rem solid;
 }

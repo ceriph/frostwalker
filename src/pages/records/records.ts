@@ -1,8 +1,8 @@
 import {Component} from '@angular/core';
 import {StoryService} from "../game/story.service";
 import {StorageService} from "../../app/storage.service";
-import {Character} from "../game/character";
-import {Option, Story} from "../game/story";
+import {Character, Data} from "../game/character";
+import {Option} from "../game/story";
 
 @Component({
   selector: 'page-records',
@@ -11,8 +11,8 @@ import {Option, Story} from "../game/story";
 export class RecordsPage {
 
   options: Option[];
+  data: Data;
   character: Character;
-  progress: number;
 
   constructor(private storyService: StoryService,
               private storageService: StorageService) {
@@ -21,9 +21,25 @@ export class RecordsPage {
   ionViewWillEnter() {
     console.log("Loading Records tab");
     this.character = this.storageService.get();
-    this.progress = Math.floor((this.character.index / this.storyService.count()) * 100);
-    this.options = this.storyService.getOptions();
+    this.data = this.storageService.getData();
+    this.options = this.storyService.getOptions().filter((option) => this.character.choices.indexOf(option.name) != -1);
 
-    this.options = this.options.filter((option) => this.character.choices.indexOf(option.name) != -1)
+    this.data.characters.forEach((character) => {})
+
+  }
+
+  getProgress(character: Character): number {
+    return Math.floor((character.index / this.storyService.count()) * 100);
+  }
+
+  getCompletion(): number {
+    const choices = [];
+    this.data.characters.forEach((character) => {
+      character.choices.forEach((choice) => {
+        if(choices.indexOf(choice) === -1)
+          choices.push(choice);
+      });
+    });
+    return (choices.length / this.storyService.getOptions().length) * 100;
   }
 }

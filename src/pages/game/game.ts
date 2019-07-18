@@ -8,6 +8,7 @@ import {StorageService} from "../../app/storage.service";
 import {NativeAudio} from "@ionic-native/native-audio/ngx";
 import {Sounds} from "./sounds";
 import {AdMobPro} from "@ionic-native/admob-pro/ngx";
+import {AlertController} from "ionic-angular";
 
 @Component({
   selector: 'page-game',
@@ -28,16 +29,26 @@ export class GamePage {
   character: Character;
   items: StoryItem[] = [];
   choice: Choice;
+  showAds: boolean = true;
 
   constructor(private nativeAudio: NativeAudio,
               private ad: AdMobPro,
               private storyService: StoryService,
               private parserService: ParserService,
-              private storageService: StorageService) {
+              private storageService: StorageService,
+              private alertCtrl: AlertController) {
 
     this.prepareAd();
+    document.addEventListener('onAdLoaded', () => {
+      console.log("Ad loaded event");
+      this.showAds = true;
+    });
+    document.addEventListener('onAdFailLoad', () => {
+      console.log("Ad failed event");
+      this.showAds = false;
+    });
     document.addEventListener('onAdDismiss', () => {
-      this.proceed();
+      console.log("Ad dismiss event");
       this.prepareAd();
     });
 
@@ -49,7 +60,11 @@ export class GamePage {
   }
 
   ionViewWillEnter() {
-    this.character = this.storageService.get();
+    if(this.storageService.get() !== this.character) {
+      this.character = this.storageService.get();
+      this.items = [];
+      this.loadNextItem();
+    }
   }
 
   onTap() {
@@ -67,19 +82,40 @@ export class GamePage {
   }
 
   proceed() {
-    // this.nativeAudio.play(Sounds.tap.id).then();
+    this.nativeAudio.play(Sounds.tap.id).then();
     this.character.index++;
     this.loadNextItem();
   }
 
   makeChoice(choice: string) {
+    if(choice.startsWith('TONIC')) {
+      this.character.tonic--;
+    }
     this.character.choices.push(choice.toUpperCase());
     this.proceed();
   }
 
   acceptName() {
     if (this.character.name.length > 0) {
-      this.proceed();
+      let alert = this.alertCtrl.create({
+        title: 'Confirm Name',
+        message: "Chosen name is '" + this.character.name + "', confirm?",
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+            }
+          },
+          {
+            text: 'Confirm',
+            handler: () => {
+              this.proceed();
+            }
+          }
+        ]
+      });
+      alert.present().then();
     }
   }
 
@@ -98,8 +134,7 @@ export class GamePage {
       this.choice = Choice.fromString(nextItem.content);
     }
 
-    console.log(nextItem.type);
-    console.log(nextItem.content);
+    console.log(nextItem.type, nextItem.content);
     this.items.push(nextItem);
   }
 
@@ -113,8 +148,15 @@ export class GamePage {
   }
 
   showAd() {
-    console.log("Showing ad");
-    this.ad.showInterstitial();
+    if(this.showAds) {
+      console.log("Showing ad");
+      this.ad.showInterstitial();
+      this.proceed();
+    } else {
+      alert("Couldn't init ad, continuing anyway...");
+      this.proceed();
+      this.prepareAd();
+    }
   }
 
   chapterTitle(content: String): String {

@@ -10,12 +10,22 @@ import {Character} from "../game/character";
 export class TonicPage {
 
   character: Character;
+  showAds: boolean = true;
 
   constructor(private ad: AdMobPro,
               private storageService: StorageService) {
 
     this.prepareAd();
+    document.addEventListener('onAdLoaded', () => {
+      console.log("Ad loaded event");
+      this.showAds = true;
+    });
+    document.addEventListener('onAdFailLoad', () => {
+      console.log("Ad failed event");
+      this.showAds = false;
+    });
     document.addEventListener('onAdDismiss', () => {
+      console.log("Ad dismiss event");
       this.character.tonic++;
       this.storageService.save(this.character);
       this.prepareAd();
@@ -40,6 +50,10 @@ export class TonicPage {
   }
 
   rewardTonic() {
-    this.ad.showRewardVideoAd();
+    if(this.showAds) {
+      this.ad.showRewardVideoAd();
+    } else {
+      alert("Ads cannot be loaded at this time");
+    }
   }
 }

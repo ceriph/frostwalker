@@ -29,14 +29,50 @@ $app-direction: ltr;
 
 $colors: (
   primary: #E2CF9A,
-
   charcoal: #161519,
   grey: #212026,
-  shadow: #8E8261,
+  wheatShadow: #8E8261,
   wheat: #E2CF9A,
   beige: #F5F7DC,
-  purple: #0F0326
+  purple: #0F0326,
+  apple: #B5D99C,
+  queen: #3E6990,
+  cobalt: #84ACCE,
+  valley: #094D92,
+  white: #FAFAFA,
+  dust: #F2F2F2,
+
+  jungle: #1A1D21,
+  charleston: #24292D,
+  onyx: #363D44,
+  space: #404951,
+  vanilla: #DBC59B,
+  dutch: #EDDAB8,
+  navajo: #FFE6A3,
+  almond: #FFF0C6,
+  pearl: #E8DFC7,
+  silk: #FFF5DB
+
 );
+
+// Dark Wheat
+$dw-backdrop: color($colors, jungle);
+$dw-overlay: color($colors, charleston);
+$dw-disabled: color($colors, vanilla);
+$dw-accent: color($colors, dutch);
+
+// Light Wheat
+$lw-backdrop: color($colors, pearl);
+$lw-overlay: color($colors, silk);
+$lw-disabled: color($colors, space);
+$lw-accent: color($colors, onyx);
+
+// Light Frost
+$lf-backdrop: color($colors, dust);
+$lf-overlay: color($colors, white);
+$lf-disabled: color($colors, grey);
+$lf-accent: color($colors, valley);
+
 
 // App iOS Variables
 // --------------------------------------------------
@@ -56,14 +92,6 @@ $colors: (
 // then be future customized. This import comes last
 // so that the above variables are used and Ionic's
 // default are overridden.
-$background-color: color($colors, charcoal);
-$text-color: color($colors, wheat);
-$text-color-shade: color($colors, shadow);
-$box-background-color: color($colors, grey);
-$box-text-color: color($colors, wheat);
-$button-background-color: color($colors, grey);
-$button-text-color: color($colors, wheat);
-$border-color: color($colors, wheat);
 
 @import "ionic.theme.default";
 
