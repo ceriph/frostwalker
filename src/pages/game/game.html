@@ -32,10 +32,15 @@
         <ion-buttons *ngIf="item.type === storyItemTypes.CHOICE">
           <div class="font-medium info clear center spaced-large" [innerHtml]="choice.text"></div>
           <div class="clear spaced-border"></div>
-          <button class="font-medium box clear center spaced" *ngFor="let option of choice.options" (tap)="makeChoice(option.name)">
-            <ion-icon *ngIf="option.name.startsWith('TONIC')" [disabled]="character.tonic == 0" name="flask"></ion-icon>
-            {{option.label}}
-          </button>
+          <div *ngFor="let option of choice.options">
+            <button class="font-medium box clear center spaced" *ngIf="!option.name.startsWith('TONIC')"  (tap)="makeChoice(option.name)">
+              {{option.label}}
+            </button>
+            <button class="font-medium box clear center spaced" *ngIf="option.name.startsWith('TONIC')" [disabled]="character.tonic == 0" (tap)="makeChoice(option.name)">
+              <ion-icon *ngIf="option.name.startsWith('TONIC')" name="flask"></ion-icon>
+              {{option.label}}
+            </button>
+          </div>
         </ion-buttons>
 
         <div *ngIf="item.type === storyItemTypes.NAME">

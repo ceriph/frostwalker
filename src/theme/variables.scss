@@ -55,23 +55,37 @@ $colors: (
 
 );
 
-// Dark Wheat
-$dw-backdrop: color($colors, jungle);
-$dw-overlay: color($colors, charleston);
-$dw-disabled: color($colors, vanilla);
-$dw-accent: color($colors, dutch);
+$transition: 1s;
 
-// Light Wheat
-$lw-backdrop: color($colors, pearl);
-$lw-overlay: color($colors, silk);
-$lw-disabled: color($colors, space);
-$lw-accent: color($colors, onyx);
+// Light Neutral
+$light-neutral-backdrop: #D7D7D7;
+$light-neutral-overlay: #E1E1E1;
+$light-neutral-disabled: #817988;
+$light-neutral-accent: #4F4A41;
 
-// Light Frost
-$lf-backdrop: color($colors, dust);
-$lf-overlay: color($colors, white);
-$lf-disabled: color($colors, grey);
-$lf-accent: color($colors, valley);
+// Light Romantic
+$light-romantic-backdrop: #EEE2DC;
+$light-romantic-overlay: #EDC7B7;
+$light-romantic-disabled: #45A29E;
+$light-romantic-accent: #123C69;
+
+// Dark Neutral
+$dark-neutral-backdrop: color($colors, jungle);
+$dark-neutral-overlay: color($colors, charleston);
+$dark-neutral-disabled: color($colors, vanilla);
+$dark-neutral-accent: color($colors, dutch);
+
+// Dark Cold
+$dark-cold-backdrop: #1B1C20;
+$dark-cold-overlay: #222430;
+$dark-cold-disabled: #2F3853;
+$dark-cold-accent: #99BFBF;
+
+// Dark Happy
+$dark-happy-backdrop: #100317;
+$dark-happy-overlay: #180824;
+$dark-happy-disabled: #6E6658;
+$dark-happy-accent: #a18022;
 
 
 // App iOS Variables

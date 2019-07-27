@@ -1,0 +1,59 @@
+.theme-light-neutral {
+  @import '../theme/variables';
+
+  $backdrop: $light-neutral-backdrop;
+  $overlay: $light-neutral-overlay;
+  $disabled: $light-neutral-disabled;
+  $accent: $light-neutral-accent;
+
+  .content, .box, .box-small, .tab-button, .tab-button[aria-selected=true], .tab-button[aria-selected=true] .tab-button-icon,
+  .border-left, .border-right, .spaced-border, .indicator-left, .indicator-right {
+    transition: background-color $transition ease, color $transition ease,
+    border-left-color $transition ease,
+    border-right-color $transition ease,
+    border-top-color $transition ease,
+    border-bottom-color $transition ease;
+  }
+
+  .logo g {
+    fill: $accent;
+  }
+
+  .content {
+    background-color: $backdrop;
+  }
+
+  .content, .box, .box-small, .tab-button[aria-selected=true], .tab-button[aria-selected=true] .tab-button-icon {
+    color: $accent !important;
+  }
+
+  .box, .tab-button, .box-small {
+    background-color: $overlay !important;
+  }
+
+  .tab-button, .tab-button-icon {
+    color: $disabled !important;
+  }
+
+  .border-left {
+    border-left-color: $accent;
+  }
+
+  .border-right {
+    border-right-color: $accent;
+  }
+
+  .spaced-border {
+    border-bottom-color: $accent;
+  }
+
+  .indicator-left {
+    border-top-color: $overlay;
+    border-left-color: $backdrop;
+  }
+
+  .indicator-right {
+    border-top-color: $overlay;
+    border-right-color: $backdrop;
+  }
+}

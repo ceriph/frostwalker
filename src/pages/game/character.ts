@@ -1,3 +1,7 @@
+export const MOOD_PREFIX = 'mood-';
+export const MOOD_DARK = 'dark-';
+export const MOOD_LIGHT = 'light-';
+
 export class Data {
   slots: number;
   lastLoaded: number;
@@ -8,16 +12,18 @@ export class Data {
   constructor() {
     this.slots = 1;
     this.lastLoaded = 0;
-    this.theme = Themes.darkWheat;
-    this.themes = [Themes.darkWheat];
+    this.theme = MOOD_PREFIX + Themes.darkNeutral;
+    this.themes = [MOOD_PREFIX + Themes.darkNeutral];
     this.characters = [new Character()];
   }
 }
 
 export class Themes {
-  static darkWheat = 'darkWheat';
-  static lightWheat = 'lightWheat';
-  static lightFrost = 'lightFrost';
+  static darkHappy = 'dark-happy';
+  static lightRomantic = 'light-romantic';
+  static darkCold = 'dark-cold';
+  static darkNeutral = 'dark-neutral';
+  static lightNeutral = 'light-neutral';
 }
 
 export class Character {

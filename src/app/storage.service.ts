@@ -48,6 +48,7 @@ export class StorageService {
   reset(slot: number) {
     this.save(new Character(), slot);
     if(slot > 0) {
+      this.data.lastLoaded = slot-1;
       this.data.characters = this.data.characters.filter((character, index) => index !== slot);
       this.saveData(this.data);
     }

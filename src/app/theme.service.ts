@@ -1,6 +1,7 @@
-import {Data, Themes} from "../pages/game/character";
+import {Data, MOOD_DARK, MOOD_LIGHT, MOOD_PREFIX, Themes} from "../pages/game/character";
 import {Injectable} from "@angular/core";
 import {StorageService} from "./storage.service";
+import {StoryService} from "../pages/game/story.service";
 
 @Injectable()
 export class ThemeService {
@@ -24,10 +25,25 @@ export class ThemeService {
     document.dispatchEvent(event);
   }
 
+  updateMood(mood: string) {
+    console.log("Updating mood,", mood);
+    if (this.isDynamic()) {
+      if (this.data.theme.indexOf(MOOD_DARK) != -1) {
+        this.update(MOOD_PREFIX + MOOD_DARK + mood);
+      } else {
+        this.update(MOOD_PREFIX + MOOD_LIGHT + mood)
+      }
+    }
+  }
+
   get(): string {
-    if(!this.data)
-      return Themes.darkWheat;
+    if (!this.data)
+      return Themes.darkNeutral;
 
     return this.data.theme;
+  }
+
+  isDynamic(): boolean {
+    return this.data.theme.startsWith(MOOD_PREFIX);
   }
 }

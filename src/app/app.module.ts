@@ -23,6 +23,7 @@ import {MyHammerConfig} from "./gestures";
 import {HttpClientModule} from "@angular/common/http";
 import {AdMobPro} from "@ionic-native/admob-pro/ngx";
 import {ThemeService} from "./theme.service";
+import {AdService} from "./ad.service";
 
 @NgModule({
   declarations: [
@@ -55,6 +56,7 @@ import {ThemeService} from "./theme.service";
     AdMobPro,
     StatusBar,
     SplashScreen,
+    AdService,
     StoryService,
     ParserService,
     StorageService,

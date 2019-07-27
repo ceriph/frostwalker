@@ -1,14 +1,15 @@
 import {Component} from "@angular/core";
 import {StoryService} from "./story.service";
 import {animate, style, transition, trigger} from "@angular/animations";
-import {Choice, StoryItem, StoryItemType} from "./story";
+import {Choice, Mood, StoryItem, StoryItemType} from "./story";
 import {Character} from "./character";
 import {ParserService} from "./parser.service";
 import {StorageService} from "../../app/storage.service";
 import {NativeAudio} from "@ionic-native/native-audio/ngx";
 import {Sounds} from "./sounds";
-import {AdMobPro} from "@ionic-native/admob-pro/ngx";
-import {AlertController} from "ionic-angular";
+import {AlertController, Platform} from "ionic-angular";
+import {ThemeService} from "../../app/theme.service";
+import {AdService} from "../../app/ad.service";
 
 @Component({
   selector: 'page-game',
@@ -25,32 +26,20 @@ import {AlertController} from "ionic-angular";
 export class GamePage {
 
   storyItemTypes = StoryItemType; // required to make enum available on page
-  maxItems = 3;
+  maxItems = 4;
   character: Character;
   items: StoryItem[] = [];
   choice: Choice;
-  showAds: boolean = true;
+  mood: Mood;
 
   constructor(private nativeAudio: NativeAudio,
-              private ad: AdMobPro,
+              private adService: AdService,
               private storyService: StoryService,
               private parserService: ParserService,
               private storageService: StorageService,
-              private alertCtrl: AlertController) {
-
-    this.prepareAd();
-    document.addEventListener('onAdLoaded', () => {
-      console.log("Ad loaded event");
-      this.showAds = true;
-    });
-    document.addEventListener('onAdFailLoad', () => {
-      console.log("Ad failed event");
-      this.showAds = false;
-    });
-    document.addEventListener('onAdDismiss', () => {
-      console.log("Ad dismiss event");
-      this.prepareAd();
-    });
+              private themeService: ThemeService,
+              private alertCtrl: AlertController,
+              private platform: Platform) {
 
     this.character = this.storageService.get();
     if (this.character == null)
@@ -60,7 +49,11 @@ export class GamePage {
   }
 
   ionViewWillEnter() {
-    if(this.storageService.get() !== this.character) {
+    console.log("Refreshing game screen", this.themeService.get());
+    this.storyService.initMood(this.character.index);
+    this.themeService.updateMood(this.storyService.mood);
+
+    if (this.storageService.get() !== this.character) {
       this.character = this.storageService.get();
       this.items = [];
       this.loadNextItem();
@@ -82,13 +75,15 @@ export class GamePage {
   }
 
   proceed() {
-    this.nativeAudio.play(Sounds.tap.id).then();
+    if (this.platform.is('cordova'))
+      this.nativeAudio.play(Sounds.tap.id).then();
+
     this.character.index++;
     this.loadNextItem();
   }
 
   makeChoice(choice: string) {
-    if(choice.startsWith('TONIC')) {
+    if (choice.startsWith('TONIC')) {
       this.character.tonic--;
     }
     this.character.choices.push(choice.toUpperCase());
@@ -125,7 +120,15 @@ export class GamePage {
 
   private loadNextItem() {
     const nextItem = this.getUntilRequirementsMet();
-    if (this.requiresNewScreen(nextItem)) {
+    if (nextItem.mood && nextItem.mood !== this.mood) {
+      console.log("Shifting to new mood", nextItem.mood);
+      this.mood = nextItem.mood;
+      this.themeService.updateMood(this.mood);
+
+      this.items = [];
+      this.storageService.save(this.character);
+
+    } else if (this.requiresNewScreen(nextItem)) {
       this.items = [];
       this.storageService.save(this.character);
     }
@@ -134,29 +137,17 @@ export class GamePage {
       this.choice = Choice.fromString(nextItem.content);
     }
 
-    console.log(nextItem.type, nextItem.content);
+    console.log(nextItem.type, nextItem.content, nextItem.mood);
     this.items.push(nextItem);
   }
 
-  prepareAd() {
-    console.log("Preparing ad...");
-    this.ad.prepareInterstitial({
-      // adId: 'ca-app-pub-4458284068451323/1153909851',
-      isTesting: true,
-      autoShow: false
-    }).then(() => console.log("Ad ready"))
-  }
-
   showAd() {
-    if(this.showAds) {
-      console.log("Showing ad");
-      this.ad.showInterstitial();
-      this.proceed();
-    } else {
-      alert("Couldn't init ad, continuing anyway...");
-      this.proceed();
-      this.prepareAd();
-    }
+    this.adService.showInterstitial(
+      () => this.proceed(),
+      () => {
+        alert("Failed to load ad, continuing anyway this time...");
+        this.proceed();
+      });
   }
 
   chapterTitle(content: String): String {

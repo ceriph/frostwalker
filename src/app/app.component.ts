@@ -8,7 +8,7 @@ import {NativeAudio} from "@ionic-native/native-audio/ngx";
 import {Sounds} from "../pages/game/sounds";
 import {StoryService} from "../pages/game/story.service";
 import {StorageService} from "./storage.service";
-import {Data} from "../pages/game/character";
+import {Data, MOOD_PREFIX, Themes} from "../pages/game/character";
 import {ThemeService} from "./theme.service";
 
 @Component({
@@ -16,7 +16,7 @@ import {ThemeService} from "./theme.service";
 })
 export class MyApp {
   rootPage: any = TabsPage;
-  theme: string;
+  theme: string = Themes.darkNeutral;
 
   constructor(platform: Platform, statusBar: StatusBar, splashScreen: SplashScreen,
               private nativeAudio: NativeAudio,
@@ -25,8 +25,9 @@ export class MyApp {
               private themeService: ThemeService) {
 
     document.addEventListener(ThemeService.onThemeChangeEvent, () => {
-      console.log("Changed theme");
-      this.theme = this.themeService.get();
+      const newTheme = this.themeService.get();
+      console.log("Changed theme to", newTheme);
+      this.theme = newTheme.replace(MOOD_PREFIX, "");
     });
 
     platform.ready().then(() => {
@@ -41,8 +42,6 @@ export class MyApp {
         }
 
         this.themeService.init();
-        this.theme = this.themeService.get();
-        console.log("Loaded theme", this.theme);
 
         this.storyService.init().subscribe(story => {
           console.log("Loaded story data", story);

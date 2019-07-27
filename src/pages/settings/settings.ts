@@ -2,37 +2,24 @@ import {Component} from '@angular/core';
 import {AlertController} from 'ionic-angular';
 import {StorageService} from "../../app/storage.service";
 import {ThemeService} from "../../app/theme.service";
-import {Character, Data, Themes} from "../game/character";
-import {AdMobPro} from "@ionic-native/admob-pro/ngx";
+import {Character, Data, MOOD_PREFIX, Themes} from "../game/character";
+import {AdService} from "../../app/ad.service";
 
 @Component({
   selector: 'page-settings',
   templateUrl: 'settings.html'
 })
 export class SettingsPage {
-
+  object = Object;
   data: Data;
   themes = Themes;
-  showAds: boolean = true;
+
+  testing = true;
 
   constructor(private alertCtrl: AlertController,
-              private ad: AdMobPro,
+              private adService: AdService,
               private storageService: StorageService,
               private themeService: ThemeService) {
-
-    this.prepareAd();
-    document.addEventListener('onAdLoaded', () => {
-      console.log("Ad loaded event");
-      this.showAds = true;
-    });
-    document.addEventListener('onAdFailLoad', () => {
-      console.log("Ad failed event");
-      this.showAds = false;
-    });
-    document.addEventListener('onAdDismiss', () => {
-      console.log("Ad dismissed event");
-      this.prepareAd()
-    });
   }
 
   ionViewWillEnter() {
@@ -40,15 +27,7 @@ export class SettingsPage {
   }
 
   reset(slot: number) {
-    this.confirmReset(slot);
-  }
-
-  load(slot: number) {
-    this.data.lastLoaded = slot;
-    this.storageService.saveData(this.data);
-  }
-
-  private confirmReset(slot: number) {
+    console.log("Resetting slot", slot);
     let alert = this.alertCtrl.create({
       title: 'Confirm Data Loss',
       message: 'Any existing progress will be lost, are you sure?',
@@ -70,31 +49,53 @@ export class SettingsPage {
     alert.present().then();
   }
 
-  setTheme(theme: string) {
-    if (this.showAds)
-      this.ad.showInterstitial();
+  load(slot: number) {
+    console.log("Loading slot", slot);
+    this.data.lastLoaded = slot;
+    this.storageService.saveData(this.data);
+  }
 
-    this.themeService.update(theme);
+  setTheme(theme: string) {
+    if (this.themeService.isDynamic() && !theme.startsWith(MOOD_PREFIX)) {
+      let alert = this.alertCtrl.create({
+        title: 'Confirm Theme Change',
+        message: 'Using a fixed theme might lose some immersion, are you sure?',
+        buttons: [
+          {
+            text: 'Cancel',
+            role: 'cancel',
+            handler: () => {
+            }
+          },
+          {
+            text: 'Confirm',
+            handler: () => {
+              if (!this.testing)
+                this.adService.showInterstitial();
+
+              this.themeService.update(theme);
+            }
+          }
+        ]
+      });
+      alert.present().then();
+
+    } else {
+      if (!this.testing)
+        this.adService.showInterstitial();
+
+      this.themeService.update(theme);
+    }
   }
 
   unlockSlot() {
-    if(this.showAds)
-      this.ad.showRewardVideoAd();
-
-    this.data.characters.push(new Character());
-    this.prepareAd();
-  }
-
-  prepareAd() {
-    console.log("Preparing ad...");
-    this.ad.prepareInterstitial({
-      // adId: 'ca-app-pub-4458284068451323/1153909851',
-      isTesting: true,
-      autoShow: false
-    }).then(() => console.log("Ad ready"))
+    this.adService.showReward(() => this.data.characters.push(new Character()));
   }
 
   isSelected(theme: string): boolean {
+    if (this.themeService.isDynamic()) {
+      return this.themeService.get().startsWith(theme);
+    }
     return this.themeService.get() === theme;
   }
 }

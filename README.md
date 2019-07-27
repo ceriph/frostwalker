@@ -34,6 +34,15 @@ Sign apk:
 ### Features
 
 * Premium choices (tonic)
+* Dynamic themes
+  * Animation!
+  * Happy
+  * Sad
+  * Dark
+  * Fun
+  * Angy
+  * Neutral
+  * Mystery?
 
 ### Bugs
 
@@ -43,7 +52,6 @@ Sign apk:
 
 * Display theme preview
 * Logo design
-* theme tuning
 
 ### Nice to haves (tech)
 
