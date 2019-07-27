@@ -14,7 +14,7 @@ export class StoryItem {
 
 export enum Mood {
   NEUTRAL = 'neutral',
-  HAPPY = 'darkHappy',
+  HAPPY = 'happy',
   SAD = 'sad',
   ROMANTIC = 'romantic',
   COLD = 'cold',

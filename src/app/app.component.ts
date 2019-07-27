@@ -27,7 +27,7 @@ export class MyApp {
     document.addEventListener(ThemeService.onThemeChangeEvent, () => {
       const newTheme = this.themeService.get();
       console.log("Changed theme to", newTheme);
-      this.theme = newTheme.replace(MOOD_PREFIX, "");
+      this.theme = newTheme.replace(MOOD_PREFIX + "-", "");
     });
 
     platform.ready().then(() => {

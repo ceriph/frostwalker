@@ -33,20 +33,14 @@ Sign apk:
 
 ### Features
 
-* Premium choices (tonic)
-* Dynamic themes
-  * Animation!
-  * Happy
-  * Sad
-  * Dark
-  * Fun
-  * Angy
-  * Neutral
-  * Mystery?
+* Premium choices (tonic) / 'energy'
+* Themes
+  * Angry?
+  * Fully dynamic?
 
 ### Bugs
 
-* Ad events mix up vs proactive carry on
+* MAJOR - Reward events don't verify
 
 ### Nice to haves (func)
 

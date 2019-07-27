@@ -63,6 +63,18 @@ $light-neutral-overlay: #E1E1E1;
 $light-neutral-disabled: #817988;
 $light-neutral-accent: #4F4A41;
 
+// Light Cold
+$light-cold-backdrop: #D7D7E7;
+$light-cold-overlay: #E1E1F1;
+$light-cold-disabled: #7179D8;
+$light-cold-accent: #4F4A81;
+
+// Light Warm
+$light-warm-backdrop: #E7D7C7;
+$light-warm-overlay: #F1F1E1;
+$light-warm-disabled: #A17958;
+$light-warm-accent: #A76A31;
+
 // Light Romantic
 $light-romantic-backdrop: #EEE2DC;
 $light-romantic-overlay: #EDC7B7;
@@ -70,10 +82,10 @@ $light-romantic-disabled: #45A29E;
 $light-romantic-accent: #123C69;
 
 // Dark Neutral
-$dark-neutral-backdrop: color($colors, jungle);
-$dark-neutral-overlay: color($colors, charleston);
-$dark-neutral-disabled: color($colors, vanilla);
-$dark-neutral-accent: color($colors, dutch);
+$dark-neutral-backdrop: #1A1D21;
+$dark-neutral-overlay: #24292D;
+$dark-neutral-disabled: #DBC59B;
+$dark-neutral-accent: #EDDAB8;
 
 // Dark Cold
 $dark-cold-backdrop: #1B1C20;
@@ -81,11 +93,17 @@ $dark-cold-overlay: #222430;
 $dark-cold-disabled: #2F3853;
 $dark-cold-accent: #99BFBF;
 
-// Dark Happy
-$dark-happy-backdrop: #100317;
-$dark-happy-overlay: #180824;
-$dark-happy-disabled: #6E6658;
-$dark-happy-accent: #a18022;
+// Dark Warm
+$dark-warm-backdrop: #100317;
+$dark-warm-overlay: #180824;
+$dark-warm-disabled: #6E6658;
+$dark-warm-accent: #F1B022;
+
+// Dark Romantic
+$dark-romantic-backdrop: #11070B;
+$dark-romantic-overlay: #190710;
+$dark-romantic-disabled: #56323D;
+$dark-romantic-accent: #895061;
 
 
 // App iOS Variables

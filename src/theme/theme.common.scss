@@ -1,11 +1,6 @@
-.theme-dark-happy {
-  @import '../theme/variables';
+@import '../theme/variables';
 
-  $backdrop: $dark-happy-backdrop;
-  $overlay: $dark-happy-overlay;
-  $disabled: $dark-happy-disabled;
-  $accent: $dark-happy-accent;
-
+@mixin theme($backdrop, $overlay, $disabled, $accent) {
   .content, .box, .box-small, .tab-button, .tab-button[aria-selected=true], .tab-button[aria-selected=true] .tab-button-icon,
   .border-left, .border-right, .spaced-border, .indicator-left, .indicator-right {
     transition: background-color $transition ease, color $transition ease,
@@ -57,3 +52,4 @@
     border-right-color: $backdrop;
   }
 }
+

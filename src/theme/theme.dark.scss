@@ -1,0 +1,18 @@
+@import '../theme/variables';
+@import "theme.common";
+
+.theme-dark-neutral {
+  @include theme($dark-neutral-backdrop, $dark-neutral-overlay, $dark-neutral-disabled, $dark-neutral-accent)
+}
+
+.theme-dark-cold {
+  @include theme($dark-cold-backdrop, $dark-cold-overlay, $dark-cold-disabled, $dark-cold-accent)
+}
+
+.theme-dark-warm {
+  @include theme($dark-warm-backdrop, $dark-warm-overlay, $dark-warm-disabled, $dark-warm-accent)
+}
+
+.theme-dark-romantic {
+  @include theme($dark-romantic-backdrop, $dark-romantic-overlay, $dark-romantic-disabled, $dark-romantic-accent)
+}

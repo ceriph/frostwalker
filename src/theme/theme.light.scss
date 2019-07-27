@@ -1,0 +1,18 @@
+@import '../theme/variables';
+@import "theme.common";
+
+.theme-light-neutral {
+  @include theme($light-neutral-backdrop, $light-neutral-overlay, $light-neutral-disabled, $light-neutral-accent)
+}
+
+.theme-light-cold {
+  @include theme($light-cold-backdrop, $light-cold-overlay, $light-cold-disabled, $light-cold-accent)
+}
+
+.theme-light-warm {
+  @include theme($light-warm-backdrop, $light-warm-overlay, $light-warm-disabled, $light-warm-accent)
+}
+
+.theme-light-romantic {
+  @include theme($light-romantic-backdrop, $light-romantic-overlay, $light-romantic-disabled, $light-romantic-accent)
+}
