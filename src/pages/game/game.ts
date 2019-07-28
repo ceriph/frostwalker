@@ -118,15 +118,9 @@ export class GamePage {
 
   private loadNextItem() {
     const nextItem = this.getUntilRequirementsMet();
-    if (nextItem.mood && nextItem.mood !== this.themeService.mood) {
-      console.log("Shifting to new mood", nextItem.mood);
-      this.themeService.updateMood(nextItem.mood);
-
-      if(nextItem.setting && nextItem.setting !== this.themeService.setting) {
-        console.log("Shifting to new setting", nextItem.mood);
-        this.themeService.updateSetting(nextItem.setting);
-      }
-
+    if (this.themeChange(nextItem)) {
+      console.log("Shifting to new dynamic theme", nextItem.setting, nextItem.mood);
+      this.themeService.updateDynamic(nextItem.setting, nextItem.mood);
       this.items = [];
       this.storageService.save(this.character);
 
@@ -139,8 +133,12 @@ export class GamePage {
       this.choice = Choice.fromString(nextItem.content);
     }
 
-    console.log(nextItem.type, nextItem.content, nextItem.mood);
+    console.log(nextItem.type, nextItem.content, nextItem.mood, nextItem.setting);
     this.items.push(nextItem);
+  }
+
+  private themeChange(storyItem: StoryItem): boolean {
+    return (storyItem.mood && storyItem.mood !== this.themeService.mood) || (storyItem.setting && storyItem.setting !== this.themeService.setting);
   }
 
   showAd() {
@@ -189,6 +187,7 @@ export class GamePage {
 
   private conditionsMet(item: StoryItem): Boolean {
     for (let requirement of item.requirements) {
+      console.log("Checking if character has", requirement);
       if (this.character.choices.indexOf(requirement) == -1) {
         return false;
       }

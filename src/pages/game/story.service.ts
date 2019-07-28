@@ -1,4 +1,4 @@
-import {Mood, Option, Story, StoryItem} from "./story";
+import {Option, Story, StoryItem} from "./story";
 import {Injectable} from "@angular/core";
 import {HttpClient} from "@angular/common/http";
 import {Observable} from "rxjs/Observable";

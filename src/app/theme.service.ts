@@ -67,6 +67,24 @@ export class ThemeService {
     document.dispatchEvent(event);
   }
 
+  updateDynamic(setting?: string, mood?: string) {
+    if (setting)
+      this.setting = setting;
+
+    if(mood)
+      this.mood = mood;
+
+    if (this.isDynamic()) {
+      if (this.data.themeMode === ThemeMode.DYNAMIC) {
+        this.update(this.setting + "-" + this.mood);
+      } else if (this.data.themeMode === ThemeMode.DYNAMIC_DARK) {
+        this.update(ThemeService.DARK_PREFIX + "-" + this.mood);
+      } else {
+        this.update(ThemeService.LIGHT_PREFIX + "-" + this.mood)
+      }
+    }
+  }
+
   updateSetting(setting?: string) {
     if (setting)
       this.setting = setting;

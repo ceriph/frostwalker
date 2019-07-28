@@ -19,7 +19,7 @@ Sign apk:
 
 ### Story
 
-* Prologue - battle, frost, ultimate enemy? - review
+* Prologue - Setup enemy and innkeeper, set expectations for town and allow exposition for dreaming - review
 * Chapter 1 - waking up, intuition to dreamer, tonic, protectors, shifters, argus, vara, twins - review
 * Chapter 2 - travel, vara, jimmy, tasha, stories - review
 * Chapter 3 - wellspring, fire 
@@ -48,5 +48,4 @@ Sign apk:
 
 ### Nice to haves (tech)
 
-* Sound service for easier web debugging
-* prod/test flags for ad testing
+* Tidy theme service

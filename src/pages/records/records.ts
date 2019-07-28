@@ -13,6 +13,7 @@ export class RecordsPage {
   options: Option[];
   data: Data;
   character: Character;
+  completion: number;
 
   constructor(private storyService: StoryService,
               private storageService: StorageService) {
@@ -24,8 +25,7 @@ export class RecordsPage {
     this.data = this.storageService.getData();
     this.options = this.storyService.getOptions().filter((option) => this.character.choices.indexOf(option.name) != -1);
 
-    this.data.characters.forEach((character) => {})
-
+    this.completion = this.getCompletion();
   }
 
   getProgress(character: Character): number {
@@ -40,6 +40,6 @@ export class RecordsPage {
           choices.push(choice);
       });
     });
-    return (choices.length / this.storyService.getOptions().length) * 100;
+    return Math.floor((choices.length / this.storyService.getOptions().length) * 100);
   }
 }

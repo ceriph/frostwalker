@@ -1,7 +1,7 @@
 <ion-content padding *ngIf="options">
   <div class="spaced-large">
     <div class="clear spaced center"><h1 class="font-large">Progress</h1></div>
-    <div class="clear box spaced font-small">Completion: {{getCompletion()}}% (all characters)</div>
+    <div class="clear box spaced font-small">Completion: {{completion}}% (all characters)</div>
     <div *ngFor="let character of data.characters" class="clear box spaced font-medium">{{!character.name ? 'Player' : character.name}}'s story: {{getProgress(character)}}%</div>
   </div>
   <div>
