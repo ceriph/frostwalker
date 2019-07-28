@@ -16,3 +16,7 @@
 .theme-dark-romantic {
   @include theme($dark-romantic-backdrop, $dark-romantic-overlay, $dark-romantic-disabled, $dark-romantic-accent)
 }
+
+.theme-dark-angry {
+  @include theme($dark-angry-backdrop, $dark-angry-overlay, $dark-angry-disabled, $dark-angry-accent)
+}

@@ -1,32 +1,37 @@
-export const MOOD_PREFIX = 'mood';
-export const MOOD_DARK = 'dark';
-export const MOOD_LIGHT = 'light';
-
 export class Data {
   slots: number;
   lastLoaded: number;
   characters: Character[];
-  themes: string[];
+  themeMode: ThemeMode;
   theme: string;
 
   constructor() {
     this.slots = 1;
     this.lastLoaded = 0;
-    this.theme = MOOD_PREFIX + "-" + Themes.darkNeutral;
-    this.themes = [MOOD_PREFIX + "-" + Themes.darkNeutral];
+    this.theme = Themes.darkNeutral;
+    this.themeMode = ThemeMode.DYNAMIC;
     this.characters = [new Character()];
   }
 }
 
+export enum ThemeMode {
+  DYNAMIC = 'dynamic',
+  DYNAMIC_DARK = 'dynamic-dark',
+  DYNAMIC_LIGHT = 'dynamic-light',
+  STATIC = 'static'
+}
+
 export class Themes {
-  static darkWarm = 'dark-warm';
-  static darkCold = 'dark-cold';
   static darkNeutral = 'dark-neutral';
+  static darkCold = 'dark-cold';
+  static darkWarm = 'dark-warm';
   static darkRomantic = 'dark-romantic';
-  static lightRomantic = 'light-romantic';
+  static darkAngry = 'dark-angry';
   static lightNeutral = 'light-neutral';
   static lightCold = 'light-cold';
   static lightWarm = 'light-warm';
+  static lightRomantic = 'light-romantic';
+  static lightAngry = 'light-angry';
 }
 
 export class Character {

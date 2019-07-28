@@ -8,7 +8,7 @@ import {NativeAudio} from "@ionic-native/native-audio/ngx";
 import {Sounds} from "../pages/game/sounds";
 import {StoryService} from "../pages/game/story.service";
 import {StorageService} from "./storage.service";
-import {Data, MOOD_PREFIX, Themes} from "../pages/game/character";
+import {Data, Themes} from "../pages/game/character";
 import {ThemeService} from "./theme.service";
 
 @Component({
@@ -27,7 +27,7 @@ export class MyApp {
     document.addEventListener(ThemeService.onThemeChangeEvent, () => {
       const newTheme = this.themeService.get();
       console.log("Changed theme to", newTheme);
-      this.theme = newTheme.replace(MOOD_PREFIX + "-", "");
+      this.theme = newTheme;
     });
 
     platform.ready().then(() => {
@@ -41,11 +41,18 @@ export class MyApp {
           this.storageService.saveData(new Data())
         }
 
-        this.themeService.init();
-
         this.storyService.init().subscribe(story => {
           console.log("Loaded story data", story);
           this.storyService.set(story);
+
+          // setup theme
+          this.themeService.init();
+          // if(this.themeService.isDynamic()) {
+          //   this.themeService.updateSetting();
+          //   this.themeService.updateMood();
+          // } else {
+          //   this.themeService.update(this.storageService.getData().theme);
+          // }
 
           // Everything is ready
           statusBar.hide();

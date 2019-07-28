@@ -1,7 +1,7 @@
 import {Component} from "@angular/core";
 import {StoryService} from "./story.service";
 import {animate, style, transition, trigger} from "@angular/animations";
-import {Choice, Mood, StoryItem, StoryItemType} from "./story";
+import {Choice, StoryItem, StoryItemType} from "./story";
 import {Character} from "./character";
 import {ParserService} from "./parser.service";
 import {StorageService} from "../../app/storage.service";
@@ -30,7 +30,6 @@ export class GamePage {
   character: Character;
   items: StoryItem[] = [];
   choice: Choice;
-  mood: Mood;
 
   constructor(private nativeAudio: NativeAudio,
               private adService: AdService,
@@ -50,8 +49,7 @@ export class GamePage {
 
   ionViewWillEnter() {
     console.log("Refreshing game screen", this.themeService.get());
-    this.storyService.initMood(this.character.index);
-    this.themeService.updateMood(this.storyService.mood);
+    this.themeService.init();
 
     if (this.storageService.get() !== this.character) {
       this.character = this.storageService.get();
@@ -120,10 +118,14 @@ export class GamePage {
 
   private loadNextItem() {
     const nextItem = this.getUntilRequirementsMet();
-    if (nextItem.mood && nextItem.mood !== this.mood) {
+    if (nextItem.mood && nextItem.mood !== this.themeService.mood) {
       console.log("Shifting to new mood", nextItem.mood);
-      this.mood = nextItem.mood;
-      this.themeService.updateMood(this.mood);
+      this.themeService.updateMood(nextItem.mood);
+
+      if(nextItem.setting && nextItem.setting !== this.themeService.setting) {
+        console.log("Shifting to new setting", nextItem.mood);
+        this.themeService.updateSetting(nextItem.setting);
+      }
 
       this.items = [];
       this.storageService.save(this.character);

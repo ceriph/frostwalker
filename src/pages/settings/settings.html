@@ -12,10 +12,11 @@
   </div>
   <div class="center"><h1 class="font-large">Themes</h1></div>
   <ion-buttons>
-    <button class="box full spaced font-medium" [disabled]="isSelected('mood-dark')" (tap)="setTheme('mood-dark')"><ion-icon *ngIf="isSelected('mood-dark')" class="icon-margin-right" name="checkmark"></ion-icon>Dynamic: Dark</button>
-    <button class="box full spaced font-medium" [disabled]="isSelected('mood-light')" (tap)="setTheme('mood-light')"><ion-icon *ngIf="isSelected('mood-light')" class="icon-margin-right" name="checkmark"></ion-icon>Dynamic: Light</button>
+    <button class="box full spaced font-medium" [disabled]="isSelected(modes.DYNAMIC)" (tap)="setTheme(modes.DYNAMIC)"><ion-icon *ngIf="isSelected(modes.DYNAMIC)" class="icon-margin-right" name="checkmark"></ion-icon>Fully Dynamic</button>
+    <button class="box full spaced font-medium" [disabled]="isSelected(modes.DYNAMIC_DARK)" (tap)="setTheme(modes.DYNAMIC_DARK)"><ion-icon *ngIf="isSelected(modes.DYNAMIC_DARK)" class="icon-margin-right" name="checkmark"></ion-icon>Dynamic: Dark</button>
+    <button class="box full spaced font-medium" [disabled]="isSelected(modes.DYNAMIC_LIGHT)" (tap)="setTheme(modes.DYNAMIC_LIGHT)"><ion-icon *ngIf="isSelected(modes.DYNAMIC_LIGHT)" class="icon-margin-right" name="checkmark"></ion-icon>Dynamic: Light</button>
     <div class="center" *ngFor="let theme of object.values(themes)">
-      <button class="box full spaced font-medium" [disabled]="isSelected(theme)" (tap)="setTheme(theme)"><ion-icon *ngIf="isSelected(theme)" class="icon-margin-right" name="checkmark"></ion-icon>Static: {{theme}}</button>
+      <button class="box full spaced font-medium" [disabled]="isSelected(theme)" (tap)="setTheme(modes.STATIC, theme)"><ion-icon *ngIf="isSelected(theme)" class="icon-margin-right" name="checkmark"></ion-icon>Static: {{theme}}</button>
     </div>
   </ion-buttons>
 </ion-content>

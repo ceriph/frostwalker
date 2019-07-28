@@ -58,52 +58,64 @@ $colors: (
 $transition: 1s;
 
 // Light Neutral
-$light-neutral-backdrop: #D7D7D7;
-$light-neutral-overlay: #E1E1E1;
-$light-neutral-disabled: #817988;
+$light-neutral-backdrop: #E5E5E5;
+$light-neutral-overlay: #F2F2F2;
+$light-neutral-disabled: #A19DA5;
 $light-neutral-accent: #4F4A41;
 
 // Light Cold
-$light-cold-backdrop: #D7D7E7;
-$light-cold-overlay: #E1E1F1;
-$light-cold-disabled: #7179D8;
-$light-cold-accent: #4F4A81;
+$light-cold-backdrop: #DAE2E5;
+$light-cold-overlay: #E6F2F1;
+$light-cold-disabled: #9D9EA5;
+$light-cold-accent: #29304F;
 
 // Light Warm
-$light-warm-backdrop: #E7D7C7;
-$light-warm-overlay: #F1F1E1;
-$light-warm-disabled: #A17958;
-$light-warm-accent: #A76A31;
+$light-warm-backdrop: #E2CEAE;
+$light-warm-overlay: #F2E7DC;
+$light-warm-disabled: #A59893;
+$light-warm-accent: #59290F;
 
 // Light Romantic
-$light-romantic-backdrop: #EEE2DC;
-$light-romantic-overlay: #EDC7B7;
-$light-romantic-disabled: #45A29E;
-$light-romantic-accent: #123C69;
+$light-romantic-backdrop: #E5CCCC;
+$light-romantic-overlay: #F2DCDC;
+$light-romantic-disabled: #BAA1A1;
+$light-romantic-accent: #5B2B38;
+
+// Light Angry
+$light-angry-backdrop: #E2CEAE;
+$light-angry-overlay: #EAD9CE;
+$light-angry-disabled: #BA978F;
+$light-angry-accent: #6D1010;
 
 // Dark Neutral
 $dark-neutral-backdrop: #1A1D21;
 $dark-neutral-overlay: #24292D;
-$dark-neutral-disabled: #DBC59B;
-$dark-neutral-accent: #EDDAB8;
+$dark-neutral-disabled: #B29F7C;
+$dark-neutral-accent: #E5D2B3;
 
 // Dark Cold
-$dark-cold-backdrop: #1B1C20;
-$dark-cold-overlay: #222430;
-$dark-cold-disabled: #2F3853;
-$dark-cold-accent: #99BFBF;
+$dark-cold-backdrop: #1A211A;
+$dark-cold-overlay: #242D26;
+$dark-cold-disabled: #7C90B2;
+$dark-cold-accent: #B3DFE5;
 
 // Dark Warm
-$dark-warm-backdrop: #100317;
-$dark-warm-overlay: #180824;
-$dark-warm-disabled: #6E6658;
-$dark-warm-accent: #F1B022;
+$dark-warm-backdrop: #211E1A;
+$dark-warm-overlay: #2D2A24;
+$dark-warm-disabled: #B2856E;
+$dark-warm-accent: #E5CA99;
 
 // Dark Romantic
-$dark-romantic-backdrop: #11070B;
-$dark-romantic-overlay: #190710;
-$dark-romantic-disabled: #56323D;
-$dark-romantic-accent: #895061;
+$dark-romantic-backdrop: #1D1A21;
+$dark-romantic-overlay: #2C242D;
+$dark-romantic-disabled: #B27C97;
+$dark-romantic-accent: #E5B3D2;
+
+// Dark Angry
+$dark-angry-backdrop: #211B15;
+$dark-angry-overlay: #2D241D;
+$dark-angry-disabled: #B26143;
+$dark-angry-accent: #E5987E;
 
 
 // App iOS Variables

@@ -36,7 +36,6 @@ Sign apk:
 * Premium choices (tonic) / 'energy'
 * Themes
   * Angry?
-  * Fully dynamic?
 
 ### Bugs
 

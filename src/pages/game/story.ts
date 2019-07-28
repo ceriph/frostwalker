@@ -10,6 +10,7 @@ export class StoryItem {
   requirements: string[] = [];
   content: string;
   mood: Mood;
+  setting: Setting;
 }
 
 export enum Mood {
@@ -20,6 +21,11 @@ export enum Mood {
   COLD = 'cold',
   WARM = 'warm',
   ANGRY = 'angry'
+}
+
+export enum Setting {
+  LIGHT = 'light',
+  DARK = 'dark'
 }
 
 export enum StoryItemType {

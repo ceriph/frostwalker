@@ -2,7 +2,7 @@ import {Component} from '@angular/core';
 import {AlertController} from 'ionic-angular';
 import {StorageService} from "../../app/storage.service";
 import {ThemeService} from "../../app/theme.service";
-import {Character, Data, MOOD_PREFIX, Themes} from "../game/character";
+import {Character, Data, ThemeMode, Themes} from "../game/character";
 import {AdService} from "../../app/ad.service";
 
 @Component({
@@ -13,6 +13,7 @@ export class SettingsPage {
   object = Object;
   data: Data;
   themes = Themes;
+  modes = ThemeMode;
 
   testing = true;
 
@@ -20,6 +21,7 @@ export class SettingsPage {
               private adService: AdService,
               private storageService: StorageService,
               private themeService: ThemeService) {
+    this.data = this.storageService.getData();
   }
 
   ionViewWillEnter() {
@@ -55,8 +57,8 @@ export class SettingsPage {
     this.storageService.saveData(this.data);
   }
 
-  setTheme(theme: string) {
-    if (this.themeService.isDynamic() && !theme.startsWith(MOOD_PREFIX)) {
+  setTheme(themeMode: ThemeMode, theme?: string) {
+    if (this.themeService.isDynamic() && themeMode === ThemeMode.STATIC) {
       let alert = this.alertCtrl.create({
         title: 'Confirm Theme Change',
         message: 'Using a fixed theme might lose some immersion, are you sure?',
@@ -64,28 +66,26 @@ export class SettingsPage {
           {
             text: 'Cancel',
             role: 'cancel',
-            handler: () => {
-            }
+            handler: () => {}
           },
           {
             text: 'Confirm',
-            handler: () => {
-              if (!this.testing)
-                this.adService.showInterstitial();
-
-              this.themeService.update(theme);
-            }
+            handler: () => this.updateTheme(themeMode, theme)
           }
         ]
       });
       alert.present().then();
 
     } else {
-      if (!this.testing)
-        this.adService.showInterstitial();
-
-      this.themeService.update(theme);
+      this.updateTheme(themeMode, theme);
     }
+  }
+
+  private updateTheme(themeMode: ThemeMode, theme?: string) {
+    if (!this.testing)
+      this.adService.showInterstitial();
+
+    this.themeService.update(theme, themeMode);
   }
 
   unlockSlot() {
@@ -94,7 +94,7 @@ export class SettingsPage {
 
   isSelected(theme: string): boolean {
     if (this.themeService.isDynamic()) {
-      return this.themeService.get().startsWith(theme);
+      return this.data.themeMode === theme;
     }
     return this.themeService.get() === theme;
   }

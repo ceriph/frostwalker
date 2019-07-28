@@ -7,14 +7,6 @@
   <div>
     <div class="spaced center"><h1 class="font-large">{{!character.name ? 'Player' : character.name}}'s Choices</h1></div>
     <div class="clear box spaced font-small" *ngFor="let option of options">{{option.label}}</div>
-    <div class="clear box spaced font-small">TEST</div>
-    <div class="clear box spaced font-small">TEST</div>
-    <div class="clear box spaced font-small">TEST</div>
-    <div class="clear box spaced font-small">TEST</div>
-    <div class="clear box spaced font-small">TEST</div>
-    <div class="clear box spaced font-small">TEST</div>
-    <div class="clear box spaced font-small">TEST</div>
-    <div class="clear box spaced font-small">TEST</div>
     <div class="clear box spaced font-small" *ngIf="options.length === 0">None</div>
   </div>
 </ion-content>
