@@ -2,7 +2,6 @@ import {Data, ThemeMode, Themes} from "../pages/game/character";
 import {Injectable} from "@angular/core";
 import {StorageService} from "./storage.service";
 import {StoryService} from "../pages/game/story.service";
-import {StoryItem} from "../pages/game/story";
 
 @Injectable()
 export class ThemeService {
@@ -10,8 +9,6 @@ export class ThemeService {
   static MOOD_PREFIX = 'mood';
   static DARK_PREFIX = 'dark';
   static LIGHT_PREFIX = 'light';
-  static MOOD_DARK_PREFIX = ThemeService.MOOD_PREFIX + "-" + ThemeService.DARK_PREFIX;
-  static MOOD_LIGHT_PREFIX = ThemeService.MOOD_PREFIX + "-" + ThemeService.LIGHT_PREFIX;
 
   data: Data;
   mood: string;

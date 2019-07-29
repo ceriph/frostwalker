@@ -11,6 +11,7 @@ export class StoryItem {
   content: string;
   mood: Mood;
   setting: Setting;
+  font: string;
 }
 
 export enum Mood {

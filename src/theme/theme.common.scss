@@ -1,5 +1,31 @@
 @import '../theme/variables';
 
+// Fonts
+@font-face {
+  font-family: 'harsh-winter';
+  //src: url('../assets/fonts/harsh-winter.otf') format("opentype");
+  src: url('../assets/fonts/precise.ttf') format("truetype");
+  src: url('../assets/fonts/precise.woff') format("woff");
+}
+
+@font-face {
+  font-family: 'ghoul';
+  //src: url('../assets/fonts/ghoul.otf') format("opentype");
+  src: url('../assets/fonts/ghoul.ttf') format("truetype");
+  src: url('../assets/fonts/ghoul.woff') format("woff");
+}
+
+.harsh-winter {
+  font-family: 'harsh-winter', 'Helvetica Neue', sans-serif !important;
+  font-size: 1.5rem !important;
+}
+
+.ghoul {
+  font-family: 'ghoul', 'Helvetica Neue', sans-serif !important;
+  font-size: 2rem !important;
+}
+
+// Themes
 @mixin theme($backdrop, $overlay, $disabled, $accent) {
   .content, .box, .box-small, .tab-button, .tab-button[aria-selected=true], .tab-button[aria-selected=true] .tab-button-icon,
   .border-left, .border-right, .spaced-border, .indicator-left, .indicator-right {
@@ -24,6 +50,10 @@
 
   .box, .tab-button, .box-small {
     background-color: $overlay !important;
+  }
+
+  input {
+    border: 1px solid $accent;
   }
 
   .tab-button, .tab-button-icon {

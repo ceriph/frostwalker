@@ -21,7 +21,7 @@
 
         <div class="clear left full spaced" *ngIf="item.type === storyItemTypes.DIALOGUE_NPC">
           <div class="indicator-left left"></div>
-          <div class="font-small font-italic box left wide border-right" [innerHtml]="parse(item.content)"></div>
+          <div class="font-small font-italic box left wide border-right" [ngClass]="item.font" [innerHtml]="parse(item.content)"></div>
         </div>
 
         <div class="clear right full spaced" *ngIf="item.type === storyItemTypes.DIALOGUE_PC">
@@ -33,7 +33,7 @@
           <div class="font-medium info clear center spaced-large" [innerHtml]="choice.text"></div>
           <div class="clear spaced-border"></div>
           <div *ngFor="let option of choice.options">
-            <button class="font-medium box clear center spaced" *ngIf="!option.name.startsWith('TONIC')"  (tap)="makeChoice(option.name)">
+            <button class="font-medium box clear center spaced" *ngIf="!option.name.startsWith('TONIC')" (tap)="makeChoice(option.name)">
               {{option.label}}
             </button>
             <button class="font-medium box clear center spaced" *ngIf="option.name.startsWith('TONIC')" [disabled]="character.tonic == 0" (tap)="makeChoice(option.name)">
@@ -44,7 +44,7 @@
         </ion-buttons>
 
         <div *ngIf="item.type === storyItemTypes.NAME">
-          <label class="font-large spaced-large">ENTER NAME</label>
+          <label class="font-large spaced-large">Enter Your Name</label>
           <div class="clear spaced"></div>
           <div class="clear spaced-border"></div>
           <form (submit)="acceptName()">

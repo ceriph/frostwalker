@@ -133,7 +133,7 @@ export class GamePage {
       this.choice = Choice.fromString(nextItem.content);
     }
 
-    console.log(nextItem.type, nextItem.content, nextItem.mood, nextItem.setting);
+    console.log(nextItem.type, nextItem.content, nextItem.mood, nextItem.setting, nextItem.font);
     this.items.push(nextItem);
   }
 
