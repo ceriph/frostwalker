@@ -1,6 +1,6 @@
 import {Component} from "@angular/core";
 import {StoryService} from "./story.service";
-import {animate, style, transition, trigger} from "@angular/animations";
+import {animate, state, style, transition, trigger} from "@angular/animations";
 import {Choice, StoryItem, StoryItemType} from "./story";
 import {Character} from "./character";
 import {ParserService} from "./parser.service";
@@ -18,7 +18,23 @@ import {AdService} from "../../app/ad.service";
     trigger('fadeIn', [
       transition(':enter', [
         style({opacity: '0'}),
-        animate('1s ease-out', style({opacity: '1'})),
+        animate('1.5s ease-out', style({opacity: '1'})),
+      ]),
+    ]),
+    trigger('fadeInVisibility', [
+      state('hidden', style({
+        visibility: 'hidden'
+      })),
+      state('visible', style({
+        visibility: 'inherited'
+      })),
+      transition('hidden=>visible', [
+        style({opacity: '0'}),
+        animate('1.5s ease-out', style({opacity: '1'})),
+      ]),
+      transition('visible=>hidden', [
+        style({opacity: '1'}),
+        animate('1.5s ease-out', style({opacity: '0'})),
       ]),
     ])
   ]
@@ -31,6 +47,11 @@ export class GamePage {
   items: StoryItem[] = [];
   choice: Choice;
 
+  showingAd = false;
+  skipAds = false;
+
+  tapping = false;
+
   constructor(private nativeAudio: NativeAudio,
               private adService: AdService,
               private storyService: StoryService,
@@ -39,6 +60,13 @@ export class GamePage {
               private themeService: ThemeService,
               private alertCtrl: AlertController,
               private platform: Platform) {
+
+    document.addEventListener('onAdPresent', (data: any) => {
+      if (data.adType == 'rewardvideo' && this.showingAd) {
+        this.proceed();
+        this.showingAd = false;
+      }
+    });
 
     this.character = this.storageService.get();
     if (this.character == null)
@@ -59,8 +87,12 @@ export class GamePage {
   }
 
   onTap() {
-    if (!this.isInteractive(this.currentStoryItem())) {
-      this.proceed();
+    if(!this.tapping) {
+      if (!this.isInteractive(this.currentStoryItem())) {
+        this.proceed();
+        this.tapping = true;
+        setTimeout(() => this.tapping = false, 1500);
+      }
     }
   }
 
@@ -121,10 +153,11 @@ export class GamePage {
     if (this.themeChange(nextItem)) {
       console.log("Shifting to new dynamic theme", nextItem.setting, nextItem.mood);
       this.themeService.updateDynamic(nextItem.setting, nextItem.mood);
-      this.items = [];
-      this.storageService.save(this.character);
+      // this.items = [];
+      // this.storageService.save(this.character);
+    }
 
-    } else if (this.requiresNewScreen(nextItem)) {
+    if (this.requiresNewScreen(nextItem)) {
       this.items = [];
       this.storageService.save(this.character);
     }
@@ -142,12 +175,18 @@ export class GamePage {
   }
 
   showAd() {
-    this.adService.showInterstitial(
-      () => this.proceed(),
-      () => {
-        alert("Failed to load ad, continuing anyway this time...");
-        this.proceed();
-      });
+    this.adService.showReward(() => {
+      this.showingAd = true;
+    });
+    if(!this.adService.showAds) {
+      console.log("Skipping ads...");
+      this.skipAds = true;
+    }
+  }
+
+  skipAd() {
+    this.skipAds = false;
+    this.proceed();
   }
 
   chapterTitle(content: String): String {

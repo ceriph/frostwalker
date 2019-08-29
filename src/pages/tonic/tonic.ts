@@ -10,10 +10,18 @@ import {AdService} from "../../app/ad.service";
 export class TonicPage {
 
   character: Character;
+  showingAd = false;
 
   constructor(private adService: AdService,
               private storageService: StorageService) {
 
+    document.addEventListener('onAdPresent', (data: any) => {
+      if (data.adType == 'rewardvideo' && this.showingAd) {
+        this.character.tonic++;
+        this.storageService.save(this.character);
+        this.showingAd = false;
+      }
+    });
   }
 
   ionViewWillEnter() {
@@ -26,8 +34,7 @@ export class TonicPage {
 
   rewardTonic() {
     this.adService.showReward(() => {
-      this.character.tonic++;
-      this.storageService.save(this.character);
+      this.showingAd = true;
     });
   }
 }

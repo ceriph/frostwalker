@@ -21,6 +21,10 @@ page-game {
     width: 90%;
   }
 
+  .thin {
+    width: 75%;
+  }
+
   strong {
     @extend .font-medium;
     font-weight: bold;

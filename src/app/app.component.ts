@@ -47,12 +47,6 @@ export class MyApp {
 
           // setup theme
           this.themeService.init();
-          // if(this.themeService.isDynamic()) {
-          //   this.themeService.updateSetting();
-          //   this.themeService.updateMood();
-          // } else {
-          //   this.themeService.update(this.storageService.getData().theme);
-          // }
 
           // Everything is ready
           statusBar.hide();

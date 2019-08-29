@@ -3,16 +3,44 @@
 // Fonts
 @font-face {
   font-family: 'harsh-winter';
-  //src: url('../assets/fonts/harsh-winter.otf') format("opentype");
   src: url('../assets/fonts/precise.ttf') format("truetype");
   src: url('../assets/fonts/precise.woff') format("woff");
 }
 
 @font-face {
   font-family: 'ghoul';
-  //src: url('../assets/fonts/ghoul.otf') format("opentype");
   src: url('../assets/fonts/ghoul.ttf') format("truetype");
   src: url('../assets/fonts/ghoul.woff') format("woff");
+}
+
+@font-face {
+  font-family: 'great';
+  src: url('../assets/fonts/great.ttf') format("truetype");
+  src: url('../assets/fonts/great.woff') format("woff");
+}
+
+@font-face {
+  font-family: 'bold';
+  src: url('../assets/fonts/bold.ttf') format("truetype");
+  src: url('../assets/fonts/bold.woff') format("woff");
+}
+
+@font-face {
+  font-family: 'formal';
+  src: url('../assets/fonts/formal.ttf') format("truetype");
+  src: url('../assets/fonts/formal.woff') format("woff");
+}
+
+@font-face {
+  font-family: 'familiar';
+  src: url('../assets/fonts/familiar.ttf') format("truetype");
+  src: url('../assets/fonts/familiar.woff') format("woff");
+}
+
+@font-face {
+  font-family: 'exotic';
+  src: url('../assets/fonts/exotic.ttf') format("truetype");
+  src: url('../assets/fonts/exotic.woff') format("woff");
 }
 
 .harsh-winter {
@@ -23,6 +51,32 @@
 .ghoul {
   font-family: 'ghoul', 'Helvetica Neue', sans-serif !important;
   font-size: 2rem !important;
+}
+
+.great {
+  font-family: 'great', 'Helvetica Neue', sans-serif !important;
+  font-size: 2rem !important;
+}
+
+.bold {
+  font-family: 'bold', 'Helvetica Neue', sans-serif !important;
+  font-size: 1.5rem !important;
+}
+
+.formal {
+  font-family: 'formal', 'Helvetica Neue', sans-serif !important;
+  font-size: 1.5rem !important;
+  line-height: 1.5rem;
+}
+
+.familiar {
+  font-family: 'familiar', 'Helvetica Neue', sans-serif !important;
+  font-size: 1.5rem !important;
+}
+
+.exotic {
+  font-family: 'exotic', 'Helvetica Neue', sans-serif !important;
+  font-size: 1.5rem !important;
 }
 
 // Themes
@@ -40,11 +94,11 @@
     fill: $accent;
   }
 
-  .content {
+  .content, .box-invis {
     background-color: $backdrop;
   }
 
-  .content, .box, .box-small, .tab-button[aria-selected=true], .tab-button[aria-selected=true] .tab-button-icon {
+  .content, .box, .box-small, .box-invis, .tab-button[aria-selected=true], .tab-button[aria-selected=true] .tab-button-icon {
     color: $accent !important;
   }
 

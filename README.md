@@ -33,9 +33,12 @@ Sign apk:
 
 ### Features
 
-* Premium choices (tonic) / 'energy'
+* Energy
 * Themes
   * Angry?
+* More text 'history' before screen change
+* Prevent over-tapping
+
 
 ### Bugs
 
@@ -43,9 +46,11 @@ Sign apk:
 
 ### Nice to haves (func)
 
+*
 * Display theme preview
 * Logo design
 
 ### Nice to haves (tech)
 
 * Tidy theme service
+

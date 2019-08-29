@@ -97,8 +97,12 @@ body {
   padding: 1.5rem;
 }
 
-.box-small {
+.box-small, .box-invis {
   padding: 1rem;
+}
+
+.box-invis {
+  text-decoration: underline;
 }
 
 .border-left {

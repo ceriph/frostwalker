@@ -5,12 +5,12 @@
       You currently have {{character.tonic}} tonic <ion-icon name="flask"></ion-icon>
     </div>
     <div class="clear center spaced font-small spaced-large">
-      <i>Tonic can be used to extend your dreams, unlocking choices that may give you better insight into the story. It is
-        not necessary to complete the story however.</i>
+      <i>Tonic can be used to extend your dreams, unlocking choices that may give you better insight into the story. However, it is
+        not necessary to progress.</i>
     </div>
 
     <ion-buttons>
-      <button class="clear box full font-medium" [disabled]="character.tonic >= 1" (click)="rewardTonic()"><ion-icon class="icon-margin-right" name="videocam"></ion-icon>Watch Ad (+1 tonic)</button>
+      <button class="clear box full font-medium" [disabled]="character.tonic >= 2" (click)="rewardTonic()"><ion-icon class="icon-margin-right" name="videocam"></ion-icon>Watch Ad (+1 tonic)</button>
     </ion-buttons>
   </div>
 </ion-content>

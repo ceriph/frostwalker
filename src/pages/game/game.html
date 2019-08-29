@@ -11,8 +11,9 @@
         <div *ngIf="item.type === storyItemTypes.CHAPTER_END">
           <div class="font-large clear center spaced-large">Chapter End</div>
           <div class="clear spaced-border"></div>
-          <div class="medium clear center spaced"><i>The following short advert helps ensure this game remains totally free.<br /><br /> Thank you</i></div>
-          <button class="font-medium box clear center" (tap)="showAd()">CONTINUE</button>
+          <div class="font-small clear center spaced"><i>You must watch a short ad to unlock the next chapter</i></div>
+          <button class="font-medium box clear center" (tap)="showAd()">Watch ad</button>
+          <button class="font-medium box-invis clear center" *ngIf="skipAds" (tap)="skipAd()">skip</button>
         </div>
 
         <div *ngIf="item.type === storyItemTypes.NARRATIVE">
@@ -30,26 +31,23 @@
         </div>
 
         <ion-buttons *ngIf="item.type === storyItemTypes.CHOICE">
-          <div class="font-medium info clear center spaced-large" [innerHtml]="choice.text"></div>
+          <div class="font-medium clear center spaced-large" [innerHtml]="choice.text"></div>
           <div class="clear spaced-border"></div>
           <div *ngFor="let option of choice.options">
-            <button class="font-medium box clear center spaced" *ngIf="!option.name.startsWith('TONIC')" (tap)="makeChoice(option.name)">
-              {{option.label}}
+            <button class="font-medium box clear center spaced" *ngIf="!option.name.startsWith('TONIC')" (tap)="makeChoice(option.name)" [innerHtml]="option.label">
             </button>
             <button class="font-medium box clear center spaced" *ngIf="option.name.startsWith('TONIC')" [disabled]="character.tonic == 0" (tap)="makeChoice(option.name)">
-              <ion-icon *ngIf="option.name.startsWith('TONIC')" name="flask"></ion-icon>
+              <ion-icon name="flask"></ion-icon>
               {{option.label}}
             </button>
           </div>
         </ion-buttons>
 
         <div *ngIf="item.type === storyItemTypes.NAME">
-          <label class="font-large spaced-large">Enter Your Name</label>
-          <div class="clear spaced"></div>
+          <label class="font-large clear center spaced-large">Enter Your Name</label>
           <div class="clear spaced-border"></div>
           <form (submit)="acceptName()">
             <input class="font-medium box clear center spaced-large" type="text" name="name" maxlength="16" [(ngModel)]="character.name" (focus)="hideTabs()" (blur)="showTabs()" onK>
-            <div class="clear spaced-border"></div>
             <button class="font-medium box clear center" type="submit">ACCEPT</button>
           </form>
         </div>
@@ -60,6 +58,12 @@
 
         <div *ngIf="item.type === storyItemTypes.TUTORIAL" class="font-medium clear center spaced" [innerHtml]="item.content"></div>
       </div>
+      <div *ngIf="tapping" class="clear spaced center" [@fadeIn]>
+        <ion-spinner name="dots"></ion-spinner>
+      </div>
+      <div *ngIf="!tapping" class="clear spaced center" [@fadeIn]>
+        <ion-spinner style="visibility: hidden" name="dots"></ion-spinner>
+      </div>
+      </div>
     </div>
-  </div>
-</ion-content>
+  </ion-content>

@@ -6,7 +6,6 @@ import {StoryService} from "../pages/game/story.service";
 @Injectable()
 export class ThemeService {
   static onThemeChangeEvent = 'onThemeChangeEvent';
-  static MOOD_PREFIX = 'mood';
   static DARK_PREFIX = 'dark';
   static LIGHT_PREFIX = 'light';
 
@@ -56,12 +55,14 @@ export class ThemeService {
       }
     }
 
-    console.log("Updating theme,", theme);
-    this.data.theme = theme;
-    this.storageService.saveData(this.data);
+    if(this.data) {
+      console.log("Updating theme,", theme);
+      this.data.theme = theme;
+      this.storageService.saveData(this.data);
 
-    const event = new Event(ThemeService.onThemeChangeEvent);
-    document.dispatchEvent(event);
+      const event = new Event(ThemeService.onThemeChangeEvent);
+      document.dispatchEvent(event);
+    }
   }
 
   updateDynamic(setting?: string, mood?: string) {

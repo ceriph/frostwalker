@@ -17,11 +17,20 @@ export class SettingsPage {
 
   testing = true;
 
+  showingAd = false;
+
   constructor(private alertCtrl: AlertController,
               private adService: AdService,
               private storageService: StorageService,
               private themeService: ThemeService) {
     this.data = this.storageService.getData();
+
+    document.addEventListener('onAdPresent', (data: any) => {
+      if (data.adType == 'rewardvideo' && this.showingAd) {
+        this.data.characters.push(new Character())
+        this.showingAd = false;
+      }
+    });
   }
 
   ionViewWillEnter() {
@@ -89,7 +98,7 @@ export class SettingsPage {
   }
 
   unlockSlot() {
-    this.adService.showReward(() => this.data.characters.push(new Character()));
+    this.adService.showReward(() => this.showingAd = true);
   }
 
   isSelected(theme: string): boolean {
