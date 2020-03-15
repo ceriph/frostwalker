@@ -1,16 +1,15 @@
 <ion-content padding>
   <div *ngIf="character" class="content">
-    <h1 class="center spaced-large font-large">Tonic</h1>
+    <h1 class="center spaced-large font-large">Soul Dust</h1>
     <div class="clear center spaced-large font-medium">
-      You currently have {{character.tonic}} tonic <ion-icon name="flask"></ion-icon>
+      You currently have {{character.dust}} dust <ion-icon name="flask"></ion-icon>
     </div>
     <div class="clear center spaced font-small spaced-large">
-      <i>Tonic can be used to extend your dreams, unlocking choices that may give you better insight into the story. However, it is
-        not necessary to progress.</i>
+      <i>Soul Dust is required to sustain your life and maintain progression. It can be also used to fuel your magic, unlocking preferable choices.</i>
     </div>
 
     <ion-buttons>
-      <button class="clear box full font-medium" [disabled]="character.tonic >= 2" (click)="rewardTonic()"><ion-icon class="icon-margin-right" name="videocam"></ion-icon>Watch Ad (+1 tonic)</button>
+      <button class="clear box full font-medium" [disabled]="character.dust >= 20" (click)="rewardTonic()"><ion-icon class="icon-margin-right" name="videocam"></ion-icon>Watch Ad (+10 dust)</button>
     </ion-buttons>
   </div>
 </ion-content>

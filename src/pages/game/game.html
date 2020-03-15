@@ -17,12 +17,14 @@
         </div>
 
         <div *ngIf="item.type === storyItemTypes.NARRATIVE">
-          <div class="font-small box clear center spaced border-left border-right" [innerHtml]="parse(item.content)"></div>
+          <div class="font-small box clear center spaced border-left border-right"
+               [innerHtml]="parse(item.content)"></div>
         </div>
 
         <div class="clear left full spaced" *ngIf="item.type === storyItemTypes.DIALOGUE_NPC">
           <div class="indicator-left left"></div>
-          <div class="font-small font-italic box left wide border-right" [ngClass]="item.font" [innerHtml]="parse(item.content)"></div>
+          <div class="font-small font-italic box left wide border-right" [ngClass]="item.font"
+               [innerHtml]="parse(item.content)"></div>
         </div>
 
         <div class="clear right full spaced" *ngIf="item.type === storyItemTypes.DIALOGUE_PC">
@@ -34,10 +36,12 @@
           <div class="font-medium clear center spaced-large" [innerHtml]="choice.text"></div>
           <div class="clear spaced-border"></div>
           <div *ngFor="let option of choice.options">
-            <button class="font-medium box clear center spaced" *ngIf="!option.name.startsWith('TONIC')" (tap)="makeChoice(option.name)" [innerHtml]="option.label">
+            <button class="font-medium box clear center spaced" *ngIf="!option.name.startsWith('DUST')"
+                    (tap)="makeChoice(option.name)" [innerHtml]="option.label">
             </button>
-            <button class="font-medium box clear center spaced" *ngIf="option.name.startsWith('TONIC')" [disabled]="character.tonic == 0" (tap)="makeChoice(option.name)">
-              <ion-icon name="flask"></ion-icon>
+            <button class="font-medium box clear center spaced" *ngIf="option.name.startsWith('DUST')"
+                    [disabled]="character.dust == 0" (tap)="makeChoice(option.name)">
+              <ion-icon name="flask">10</ion-icon>
               {{option.label}}
             </button>
           </div>
@@ -47,7 +51,8 @@
           <label class="font-large clear center spaced-large">Enter Your Name</label>
           <div class="clear spaced-border"></div>
           <form (submit)="acceptName()">
-            <input class="font-medium box clear center spaced-large" type="text" name="name" maxlength="16" [(ngModel)]="character.name" (focus)="hideTabs()" (blur)="showTabs()" onK>
+            <input class="font-medium box clear center spaced-large" type="text" name="name" maxlength="16"
+                   [(ngModel)]="character.name" (focus)="hideTabs()" (blur)="showTabs()" onK>
             <button class="font-medium box clear center" type="submit">ACCEPT</button>
           </form>
         </div>
@@ -56,7 +61,8 @@
           {{item.content}}
         </div>
 
-        <div *ngIf="item.type === storyItemTypes.TUTORIAL" class="font-medium clear center spaced" [innerHtml]="item.content"></div>
+        <div *ngIf="item.type === storyItemTypes.TUTORIAL" class="font-medium clear center spaced"
+             [innerHtml]="item.content"></div>
       </div>
       <div *ngIf="tapping" class="clear spaced center" [@fadeIn]>
         <ion-spinner name="dots"></ion-spinner>
@@ -64,6 +70,7 @@
       <div *ngIf="!tapping" class="clear spaced center" [@fadeIn]>
         <ion-spinner style="visibility: hidden" name="dots"></ion-spinner>
       </div>
-      </div>
     </div>
-  </ion-content>
+    <div *ngIf="items[items.length-1].type !== storyItemTypes.TUTORIAL && items[items.length-1].type !== storyItemTypes.CHAPTER && items[items.length-1].type !== storyItemTypes.CHAPTER_END" class="top faint font-medium clear center spaced">DUST: {{character.dust}}</div>
+  </div>
+</ion-content>

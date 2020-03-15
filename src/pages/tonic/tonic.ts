@@ -17,7 +17,7 @@ export class TonicPage {
 
     document.addEventListener('onAdPresent', (data: any) => {
       if (data.adType == 'rewardvideo' && this.showingAd) {
-        this.character.tonic++;
+        this.character.dust++;
         this.storageService.save(this.character);
         this.showingAd = false;
       }
@@ -26,8 +26,8 @@ export class TonicPage {
 
   ionViewWillEnter() {
     this.character = this.storageService.get();
-    if (!this.character.tonic) {
-      this.character.tonic = 0;
+    if (!this.character.dust) {
+      this.character.dust = 0;
       this.storageService.save(this.character);
     }
   }

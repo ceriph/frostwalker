@@ -93,6 +93,15 @@ body {
   transform: translateY(-50%);
 }
 
+.top {
+  position: absolute;
+  top: 0;
+}
+
+.faint {
+  opacity: 0.6;
+}
+
 .box {
   padding: 1.5rem;
 }

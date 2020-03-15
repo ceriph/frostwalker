@@ -51,6 +51,7 @@ export class GamePage {
   skipAds = false;
 
   tapping = false;
+  dev = true;
 
   constructor(private nativeAudio: NativeAudio,
               private adService: AdService,
@@ -90,8 +91,10 @@ export class GamePage {
     if(!this.tapping) {
       if (!this.isInteractive(this.currentStoryItem())) {
         this.proceed();
-        this.tapping = true;
-        setTimeout(() => this.tapping = false, 1500);
+        if(!this.dev) {
+          this.tapping = true;
+          setTimeout(() => this.tapping = false, 800);
+        }
       }
     }
   }
@@ -113,8 +116,8 @@ export class GamePage {
   }
 
   makeChoice(choice: string) {
-    if (choice.startsWith('TONIC')) {
-      this.character.tonic--;
+    if (choice.startsWith('DUST')) {
+      this.character.dust = this.character.dust-10;
     }
     this.character.choices.push(choice.toUpperCase());
     this.proceed();
